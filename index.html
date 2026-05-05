@@ -135,24 +135,58 @@
       top:0; 
       z-index: 100;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+    
+    /* ============================================== */
+    /* LOGO EM IMAGEM .PNG - ALTERE AQUI O CAMINHO DO SEU ARQUIVO */
+    /* INSTRUÇÃO: Substitua 'logo-mega-oferta.png' pelo caminho real da sua imagem .png */
+    /* Exemplo: "images/minha-logo.png" ou "https://seusite.com/logo.png" */
+    /* ============================================== */
+    .custom-logo-img {
+      display: block;
+      width: 260px;      /* Largura fixa 260px conforme solicitado */
+      height: 84px;      /* Altura fixa 84px */
+      object-fit: contain; /* Mantém proporção e evita distorção */
+      transition: transform 0.2s ease;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+    }
+    .custom-logo-img:hover {
+      transform: scale(1.02);
+    }
+    /* Responsivo: em telas menores a logo reduz mantendo proporção */
+    @media (max-width: 580px) {
+      .custom-logo-img {
+        width: 200px;
+        height: 66px;
+      }
+    }
+    @media (max-width: 460px) {
+      .custom-logo-img {
+        width: 160px;
+        height: 52px;
+      }
+    }
+    
     .nav-bounds {
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
-      gap: 8px;
+      gap: 12px;
+      width: 100%;
       max-width: 100%;
     }
-    .nav-logo {
-      background-image: url('https://http2.mlstatic.com/frontend-assets/homes-palpatine/images/logo_large_plus%402x.webp');
-      background-size: contain; 
-      background-repeat: no-repeat;
-      width: 110px; 
-      height: 30px; 
-      text-indent: -999px; 
-      overflow: hidden;
+    .nav-logo-original {
+      display: none;
     }
-    .nav-search { flex: 1; position: relative; }
+    .nav-search { 
+      flex: 1; 
+      position: relative;
+      max-width: 380px;
+      margin-left: auto;
+    }
     .nav-search-input {
       width: 100%; 
       height: 38px; 
@@ -171,7 +205,17 @@
       font-size: 18px;
       cursor: pointer;
     }
-    .cart-icon { font-size: 24px; text-decoration: none; color: #333; }
+    .cart-icon { 
+      font-size: 26px; 
+      text-decoration: none; 
+      color: #1a1f2c; 
+      background: white;
+      padding: 6px 12px;
+      border-radius: 40px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: inline-flex;
+      align-items: center;
+    }
     /* MAIN */
     .container { padding: 16px 12px 24px; max-width: 100%; margin: 0 auto; }
     .promo-banner {
@@ -216,17 +260,52 @@
       .promo-banner h1 { font-size: 1.3rem; }
       .roleta-container { max-width: 95%; padding: 16px; }
       canvas { width: 210px; height: 210px; }
+      .nav-search { max-width: 200px; }
     }
     /* Esconder elementos indesejados do ML */
     .nav-menu-cp, .user-menu-guest-item, .nav-menu-categories-link, .nav-categs, 
     a[href*="registration"], a[href*="login"], a[href*="purchases"] { display: none !important; }
   </style>
+  <!-- TikTok Pixel Code Start -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+      var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+      ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+      ttq.load('D7SKF7JC77U1G0JPMTI0');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
 </head>
 <body>
 
 <header class="nav-header">
   <div class="nav-bounds">
-    <a class="nav-logo" href="#">Mercado Livre</a>
+    <!-- 
+      ============================================================
+      LOGO EM FORMATO DE IMAGEM .PNG (TAMANHO 260x84)
+      ============================================================
+      INSTRUÇÃO: Altere o atributo 'src' da imagem abaixo para o caminho 
+      do seu próprio arquivo .png.
+      
+      Exemplo de uso: 
+      - Se a imagem estiver na mesma pasta: src="minha-logo.png"
+      - Se estiver em uma subpasta: src="imagens/logo-mega.png"
+      - Se for um link externo: src="https://meusite.com/logo-mega.png"
+      
+      A imagem será exibida com largura 260px e altura 84px automaticamente
+      (mantendo proporção com object-fit: contain).
+      ============================================================
+    -->
+    <a href="#" class="custom-logo" aria-label="Mega Ofertas Logo">
+      <img class="custom-logo-img" 
+           src="999.png" 
+           alt="Mega Ofertas Logo"
+           onerror="this.onerror=null; this.src='t=MegaOferta+PNG'https://placehold.co/260x84/ffe600/663300?tex;">
+    </a>
+    
+    <!-- Barra de pesquisa e carrinho simplificados -->
     <div class="nav-search">
       <input class="nav-search-input" placeholder="Buscar ofertas com frete grátis...">
       <button class="nav-search-btn">🔍</button>
@@ -303,7 +382,7 @@
   let girando = false;
   let animFrame = null;
   
-  // Segmentos com DESCONTOS ESCRITOS por extenso (mais visível)
+  // Segmentos com DESCONTOS ESCRITOS por extenso
   const segmentos = [
     { label: "10% OFF", cor: "#ff6b6b", desconto: "10%" },
     { label: "20% OFF", cor: "#4d96ff", desconto: "20%" },
@@ -313,7 +392,7 @@
     { label: "5% OFF", cor: "#a55dca", desconto: "5%" },
     { label: "DESCONTO ESPECIAL", cor: "#5f9ea0", desconto: "Extra!" }
   ];
-  const PREMIO_INDEX = 4; // index do frete grátis garantido
+  const PREMIO_INDEX = 4;
   const anguloPorSeg = (Math.PI * 2) / segmentos.length;
   
   function desenharRoleta() {
@@ -336,7 +415,6 @@
       let txt = segmentos[i].label;
       if(txt.length > 12) txt = txt.slice(0,10)+"..";
       ctx.fillText(txt, raio*0.62, 6);
-      // detalhe extra com porcentagem
       if(segmentos[i].desconto && segmentos[i].desconto !== "Frete Grátis") {
         ctx.font = "bold 9px 'Segoe UI'";
         ctx.fillStyle = "#fff8e0";
@@ -344,7 +422,6 @@
       }
       ctx.restore();
     }
-    // seta indicadora mais chamativa
     ctx.beginPath();
     ctx.moveTo(centroX-12, centroY-raio-8);
     ctx.lineTo(centroX, centroY-raio+6);
@@ -365,7 +442,7 @@
     if(girando || jaGirou) return;
     jaGirou = true;
     girando = true;
-    const anguloAlvoSegmento = PREMIO_INDEX; // sempre para frete grátis
+    const anguloAlvoSegmento = PREMIO_INDEX;
     const anguloSeta = -Math.PI/2;
     const anguloCentral = anguloAlvoSegmento * anguloPorSeg + (anguloPorSeg/2);
     let anguloFinalBase = anguloSeta - anguloCentral;
@@ -417,7 +494,7 @@
     renderizarCatalogo();
   }
 
-  // ----- CATÁLOGO COMPLETO COM LINKS REAIS NOS BOTÕES -----
+  // CATÁLOGO
   const catalogoData = [
     { categoria: "🔋 Capinhas e Películas", produtos: [
       { nome: "Capinha Silicone iPhone 12/13 Pro", original: 40, final: 23, img: "29.png" },
@@ -479,7 +556,6 @@
       for(let prod of cat.produtos) {
         const card = document.createElement('div');
         card.className = 'product-card';
-        // Obtém link real baseado no nome exato do produto
         const linkReal = linksProdutos[prod.nome] || "#";
         card.innerHTML = `
           <div class="product-img"><img src="${prod.img}" alt="${prod.nome}" loading="lazy" onerror="this.src='https://picsum.photos/id/20/200/200'"></div>
@@ -498,7 +574,7 @@
           e.stopPropagation();
           const url = btn.getAttribute('data-url');
           if(url && url !== "#") {
-            window.open(url, '_blank'); // abre link do produto em nova aba
+            window.open(url, '_blank');
           } else {
             alert("Link promocional disponível em breve!");
           }
@@ -508,7 +584,6 @@
       section.appendChild(grid);
       container.appendChild(section);
     }
-    // scroll suave para o banner
     const banner = document.getElementById('promoBanner');
     if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -526,7 +601,6 @@
     });
   }
 
-  // Inicialização
   window.addEventListener('DOMContentLoaded', () => {
     removerIndesejados();
     exibirRoleta();
@@ -541,7 +615,7 @@
   });
 </script>
 <footer>
-  <p>© 2025 Mercado Livre - Ofertas com frete grátis e descontos exclusivos via roleta</p>
+  <p>© 2025 Mega Ofertas - Frete Grátis + Descontos exclusivos via roleta</p>
 </footer>
 </body>
 </html>
