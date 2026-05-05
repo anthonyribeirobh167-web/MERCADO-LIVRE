@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | Descontos + Frete Grátis</title>
   
-  <!-- TikTok Pixel Code Start -->
+  <!-- TikTok Pixel Code Start - Configuração CORRIGIDA com parâmetros de e-commerce -->
   <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
@@ -14,16 +14,18 @@
       
       ttq.load('D7SKET3C77U99QEMNJR0');
       ttq.page();
-      
-      // ==============================================
-      // EVENTO ViewContent - Avisa o TikTok que o usuário está vendo os produtos
-      // Adicionado conforme solicitação (logo após ttq.page())
-      // ==============================================
+
+      // Evento de Visualização corrigido para e-commerce
       ttq.track('ViewContent', {
-        contents: [{ content_type: 'product' }],
+        contents: [
+          {
+            content_type: 'product_group',
+            content_id: 'mega_oferta_principal' 
+          }
+        ],
         content_type: 'product_group'
       });
-      console.log('✅ TikTok Pixel - ViewContent disparado (página carregada)');
+      console.log('✅ TikTok Pixel - ViewContent corrigido disparado');
       
     }(window, document, 'ttq');
   </script>
@@ -576,21 +578,29 @@
         const btn = card.querySelector('.btn-buy');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          
+
           // ==============================================
-          // DISPARO TIKTOK - EVENTO AddToCart
-          // Conforme solicitado: rastreia quando o usuário clica em "Comprar agora"
+          // DISPARO TIKTOK CORRIGIDO: Incluindo ID, nome e valor
+          // Conforme solicitado - AddToCart com parâmetros completos
           // ==============================================
           if (typeof ttq !== 'undefined') {
             ttq.track('AddToCart', {
-              contents: [{ content_name: prod.nome }],
+              contents: [
+                {
+                  content_id: prod.nome.replace(/\s+/g, '_').toLowerCase(), // Cria um ID simples
+                  content_name: prod.nome,
+                  content_type: 'product',
+                  quantity: 1,
+                  price: prod.final
+                }
+              ],
               value: prod.final,
               currency: 'BRL'
             });
-            console.log('🛒 TikTok Pixel - AddToCart disparado para:', prod.nome, 'Valor: R$', prod.final);
+            console.log('🛒 TikTok Pixel - AddToCart CORRIGIDO disparado para:', prod.nome, 'ID:', prod.nome.replace(/\s+/g, '_').toLowerCase(), 'Valor: R$', prod.final);
           }
           
-          // DISPARO META PIXEL (Facebook) - AddToCart também
+          // DISPARO META PIXEL (Facebook) - AddToCart
           if (typeof fbq !== 'undefined') {
             fbq('track', 'AddToCart', {
               value: prod.final,
