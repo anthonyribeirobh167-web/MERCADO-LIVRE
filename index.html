@@ -4,6 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | Descontos + Frete Grátis</title>
+  
+  <!-- TikTok Pixel Code Start (INSERIDO DENTRO DA TAG HEAD CONFORME SOLICITADO) -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+      var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+      ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+      
+      ttq.load('D7SKET3C77U99QEMNJR0');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  
   <style>
     * {
       margin: 0;
@@ -142,8 +156,8 @@
     
     /* ============================================== */
     /* LOGO EM IMAGEM .PNG - ALTERE AQUI O CAMINHO DO SEU ARQUIVO */
-    /* INSTRUÇÃO: Substitua 'logo-mega-oferta.png' pelo caminho real da sua imagem .png */
-    /* Exemplo: "images/minha-logo.png" ou "https://seusite.com/logo.png" */
+    /* INSTRUÇÃO: Altere o atributo 'src' da imagem abaixo para o caminho 
+       do seu próprio arquivo .png. Exemplo: "images/minha-logo.png" ou "https://seusite.com/logo.png" */
     /* ============================================== */
     .custom-logo-img {
       display: block;
@@ -266,17 +280,6 @@
     .nav-menu-cp, .user-menu-guest-item, .nav-menu-categories-link, .nav-categs, 
     a[href*="registration"], a[href*="login"], a[href*="purchases"] { display: none !important; }
   </style>
-  <!-- TikTok Pixel Code Start -->
-  <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-      var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-      ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-      ttq.load('D7SKF7JC77U1G0JPMTI0');
-      ttq.page();
-    }(window, document, 'ttq');
-  </script>
-  <!-- TikTok Pixel Code End -->
 </head>
 <body>
 
@@ -300,9 +303,9 @@
     -->
     <a href="#" class="custom-logo" aria-label="Mega Ofertas Logo">
       <img class="custom-logo-img" 
-           src="999.png" 
+           src="logo-mega-oferta.png" 
            alt="Mega Ofertas Logo"
-           onerror="this.onerror=null; this.src='t=MegaOferta+PNG'https://placehold.co/260x84/ffe600/663300?tex;">
+           onerror="this.onerror=null; this.src='https://placehold.co/260x84/ffe600/663300?text=MegaOferta+PNG';">
     </a>
     
     <!-- Barra de pesquisa e carrinho simplificados -->
@@ -392,7 +395,7 @@
     { label: "5% OFF", cor: "#a55dca", desconto: "5%" },
     { label: "DESCONTO ESPECIAL", cor: "#5f9ea0", desconto: "Extra!" }
   ];
-  const PREMIO_INDEX = 4;
+  const PREMIO_INDEX = 4; // index do frete grátis garantido
   const anguloPorSeg = (Math.PI * 2) / segmentos.length;
   
   function desenharRoleta() {
@@ -494,7 +497,7 @@
     renderizarCatalogo();
   }
 
-  // CATÁLOGO
+  // CATÁLOGO COMPLETO
   const catalogoData = [
     { categoria: "🔋 Capinhas e Películas", produtos: [
       { nome: "Capinha Silicone iPhone 12/13 Pro", original: 40, final: 23, img: "29.png" },
@@ -601,6 +604,7 @@
     });
   }
 
+  // Inicialização
   window.addEventListener('DOMContentLoaded', () => {
     removerIndesejados();
     exibirRoleta();
