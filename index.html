@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | Descontos + Frete Grátis</title>
   
-  <!-- TikTok Pixel Code Start (INSERIDO DENTRO DA TAG HEAD CONFORME SOLICITADO) -->
+  <!-- TikTok Pixel Code Start -->
   <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
@@ -14,11 +14,22 @@
       
       ttq.load('D7SKET3C77U99QEMNJR0');
       ttq.page();
+      
+      // ==============================================
+      // EVENTO ViewContent - Avisa o TikTok que o usuário está vendo os produtos
+      // Adicionado conforme solicitação (logo após ttq.page())
+      // ==============================================
+      ttq.track('ViewContent', {
+        contents: [{ content_type: 'product' }],
+        content_type: 'product_group'
+      });
+      console.log('✅ TikTok Pixel - ViewContent disparado (página carregada)');
+      
     }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
   
-  <!-- Meta Pixel Code com Código de Teste - INSERIDO LOGO ABAIXO DO TIKTOK E ANTES DO FECHAMENTO </head> -->
+  <!-- Meta Pixel Code com Código de Teste -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -33,17 +44,15 @@
     fbq('init', 'SEU_ID_DO_PIXEL_AQUI'); // IMPORTANTE: Substitua pelo número do seu Pixel do Facebook
     fbq('track', 'PageView');
 
-    // FUNÇÃO PARA DISPARAR O EVENTO DE TESTE QUE APARECE NA SUA FOTO
     function dispararTesteMeta() {
       fbq('track', 'ViewContent', {
         content_name: 'Pagina de Ofertas'
       }, {
-        test_event_code: 'TES143470' // O código da sua image.png conforme solicitado
+        test_event_code: 'TES143470'
       });
-      console.log("✅ Evento de teste enviado para a Meta (Facebook Pixel)!");
+      console.log("✅ Meta Pixel - Evento de teste enviado!");
     }
 
-    // Disparar automaticamente ao carregar a página
     window.addEventListener('load', dispararTesteMeta);
   </script>
   <!-- End Meta Pixel Code -->
@@ -64,7 +73,6 @@
       overflow-x: hidden;
     }
 
-    /* ROLETA OVERLAY - MAIS VISÍVEL E COM DESTAQUE */
     .overlay-roleta {
       position: fixed;
       top: 0;
@@ -171,7 +179,6 @@
       70% { transform: translate(-50%, -50%) scale(1.02); box-shadow: 0 0 0 8px white, 0 0 0 16px #00c853; }
       100% { transform: translate(-50%, -50%) scale(1); }
     }
-    /* HEADER */
     .nav-header {
       background: #ffe600; 
       padding: 8px 12px; 
@@ -184,7 +191,6 @@
       justify-content: space-between;
     }
     
-    /* LOGO EM IMAGEM .PNG - TAMANHO 260x84 */
     .custom-logo-img {
       display: block;
       width: 260px;
@@ -247,7 +253,6 @@
       display: inline-flex;
       align-items: center;
     }
-    /* MAIN */
     .container { padding: 16px 12px 24px; max-width: 100%; margin: 0 auto; }
     .promo-banner {
       background: linear-gradient(95deg, #0a2b1e, #0a5c3a);
@@ -266,7 +271,6 @@
     .promo-banner p { font-size: 1rem; color: #e0ffe0; background: rgba(0,0,0,0.4); display: inline-block; padding: 6px 20px; border-radius: 40px; font-weight: 500; }
     .badge-desconto { background: #ff5722; color: white; border-radius: 30px; padding: 5px 14px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
     
-    /* CATEGORIAS */
     .category-section { margin-bottom: 42px; }
     .category-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 18px; padding-left: 12px; border-left: 6px solid #00a650; display: inline-block; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-top: 12px; }
@@ -337,110 +341,6 @@
 <button id="btnMegaCompra" class="btn-mega-compra">🛍️ VER PRODUTOS COM FRETE GRÁTIS + DESCONTOS 🚚</button>
 
 <script>
-  // ==============================================
-  // FUNÇÕES DE RASTREAMENTO TIKTOK PIXEL
-  // ==============================================
-  
-  function gerarEventID() {
-    return 'event_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-  }
-  
-  function trackTikTokPurchase(valor, produtoNome, currency = 'BRL') {
-    if (typeof ttq !== 'undefined') {
-      const eventID = gerarEventID();
-      ttq.track('Purchase', {
-        value: valor,
-        currency: currency,
-        content_name: produtoNome || 'Produto Mega Oferta',
-        content_type: 'product'
-      }, {
-        eventID: eventID,
-        test_event_code: 'TES143470'
-      });
-      console.log('✅ TikTok Pixel - Purchase rastreado:', produtoNome, 'Valor: R$', valor);
-    }
-  }
-  
-  function trackTikTokAddToCart(produtoNome, valor) {
-    if (typeof ttq !== 'undefined') {
-      ttq.track('AddToCart', {
-        value: valor,
-        currency: 'BRL',
-        content_name: produtoNome,
-        content_type: 'product'
-      });
-      console.log('🛒 TikTok Pixel - AddToCart rastreado:', produtoNome);
-    }
-  }
-  
-  function trackTikTokViewContent() {
-    if (typeof ttq !== 'undefined') {
-      ttq.track('ViewContent', {
-        content_name: 'Catálogo de Ofertas com Frete Grátis',
-        content_type: 'product_group'
-      });
-      console.log('👁️ TikTok Pixel - ViewContent rastreado');
-    }
-  }
-  
-  function trackTikTokCompleteRegistration() {
-    if (typeof ttq !== 'undefined') {
-      ttq.track('CompleteRegistration', {
-        status: 'frete_gratis_garantido',
-        content_name: 'Roleta Frete Grátis'
-      });
-      console.log('🎁 TikTok Pixel - CompleteRegistration rastreado');
-    }
-  }
-
-  // ==============================================
-  // FUNÇÕES DE RASTREAMENTO META PIXEL (Facebook)
-  // ==============================================
-  
-  function trackMetaPurchase(valor, produtoNome, currency = 'BRL') {
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'Purchase', {
-        value: valor,
-        currency: currency,
-        content_name: produtoNome,
-        content_type: 'product'
-      });
-      console.log('💰 Meta Pixel - Purchase rastreado:', produtoNome, 'Valor: R$', valor);
-    }
-  }
-  
-  function trackMetaAddToCart(produtoNome, valor) {
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'AddToCart', {
-        value: valor,
-        currency: 'BRL',
-        content_name: produtoNome,
-        content_type: 'product'
-      });
-      console.log('🛒 Meta Pixel - AddToCart rastreado:', produtoNome);
-    }
-  }
-  
-  function trackMetaViewContent() {
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'ViewContent', {
-        content_name: 'Catálogo de Ofertas com Frete Grátis',
-        content_type: 'product_group'
-      });
-      console.log('👁️ Meta Pixel - ViewContent rastreado');
-    }
-  }
-  
-  function trackMetaCompleteRegistration() {
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'CompleteRegistration', {
-        status: 'frete_gratis_garantido',
-        content_name: 'Roleta Frete Grátis'
-      });
-      console.log('🎁 Meta Pixel - CompleteRegistration rastreado');
-    }
-  }
-
   // ---------- LINKS REAIS PARA CADA PRODUTO ----------
   const linksProdutos = {
     "Capinha Silicone iPhone 12/13 Pro": "https://go.goatpayments.com.br/fco9nwgqhx",
@@ -573,8 +473,6 @@
         btnGirar.textContent = "✅ FRETE GRÁTIS GARANTIDO! ✅";
         btnMega.style.display = "block";
         cancelAnimationFrame(animFrame);
-        trackTikTokCompleteRegistration();
-        trackMetaCompleteRegistration();
       }
     }
     animFrame = requestAnimationFrame(step);
@@ -598,8 +496,6 @@
     btnMega.style.display = "none";
     document.getElementById('promoBanner').style.display = 'block';
     renderizarCatalogo();
-    trackTikTokViewContent();
-    trackMetaViewContent();
   }
 
   // CATÁLOGO COMPLETO
@@ -680,18 +576,32 @@
         const btn = card.querySelector('.btn-buy');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
+          
+          // ==============================================
+          // DISPARO TIKTOK - EVENTO AddToCart
+          // Conforme solicitado: rastreia quando o usuário clica em "Comprar agora"
+          // ==============================================
+          if (typeof ttq !== 'undefined') {
+            ttq.track('AddToCart', {
+              contents: [{ content_name: prod.nome }],
+              value: prod.final,
+              currency: 'BRL'
+            });
+            console.log('🛒 TikTok Pixel - AddToCart disparado para:', prod.nome, 'Valor: R$', prod.final);
+          }
+          
+          // DISPARO META PIXEL (Facebook) - AddToCart também
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'AddToCart', {
+              value: prod.final,
+              currency: 'BRL',
+              content_name: prod.nome,
+              content_type: 'product'
+            });
+            console.log('💰 Meta Pixel - AddToCart disparado para:', prod.nome);
+          }
+          
           const url = btn.getAttribute('data-url');
-          const produtoNome = btn.getAttribute('data-produto');
-          const produtoValor = parseFloat(btn.getAttribute('data-valor'));
-          
-          // RASTREAMENTO TikTok
-          trackTikTokAddToCart(produtoNome, produtoValor);
-          trackTikTokPurchase(produtoValor, produtoNome, 'BRL');
-          
-          // RASTREAMENTO Meta (Facebook)
-          trackMetaAddToCart(produtoNome, produtoValor);
-          trackMetaPurchase(produtoValor, produtoNome, 'BRL');
-          
           if(url && url !== "#") {
             window.open(url, '_blank');
           } else {
@@ -720,7 +630,6 @@
     });
   }
 
-  // Inicialização
   window.addEventListener('DOMContentLoaded', () => {
     removerIndesejados();
     exibirRoleta();
