@@ -18,6 +18,36 @@
   </script>
   <!-- TikTok Pixel Code End -->
   
+  <!-- Meta Pixel Code com Código de Teste - INSERIDO LOGO ABAIXO DO TIKTOK E ANTES DO FECHAMENTO </head> -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // INICIALIZAÇÃO DO SEU PIXEL - ATENÇÃO: Substitua 'SEU_ID_DO_PIXEL_AQUI' pelo número do seu Pixel
+    fbq('init', 'SEU_ID_DO_PIXEL_AQUI'); // IMPORTANTE: Substitua pelo número do seu Pixel do Facebook
+    fbq('track', 'PageView');
+
+    // FUNÇÃO PARA DISPARAR O EVENTO DE TESTE QUE APARECE NA SUA FOTO
+    function dispararTesteMeta() {
+      fbq('track', 'ViewContent', {
+        content_name: 'Pagina de Ofertas'
+      }, {
+        test_event_code: 'TES143470' // O código da sua image.png conforme solicitado
+      });
+      console.log("✅ Evento de teste enviado para a Meta (Facebook Pixel)!");
+    }
+
+    // Disparar automaticamente ao carregar a página
+    window.addEventListener('load', dispararTesteMeta);
+  </script>
+  <!-- End Meta Pixel Code -->
+  
   <style>
     * {
       margin: 0;
@@ -154,34 +184,23 @@
       justify-content: space-between;
     }
     
-    /* ============================================== */
-    /* LOGO EM IMAGEM .PNG - ALTERE AQUI O CAMINHO DO SEU ARQUIVO */
-    /* INSTRUÇÃO: Altere o atributo 'src' da imagem abaixo para o caminho 
-       do seu próprio arquivo .png. Exemplo: "images/minha-logo.png" ou "https://seusite.com/logo.png" */
-    /* ============================================== */
+    /* LOGO EM IMAGEM .PNG - TAMANHO 260x84 */
     .custom-logo-img {
       display: block;
-      width: 260px;      /* Largura fixa 260px conforme solicitado */
-      height: 84px;      /* Altura fixa 84px */
-      object-fit: contain; /* Mantém proporção e evita distorção */
+      width: 260px;
+      height: 84px;
+      object-fit: contain;
       transition: transform 0.2s ease;
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
     }
     .custom-logo-img:hover {
       transform: scale(1.02);
     }
-    /* Responsivo: em telas menores a logo reduz mantendo proporção */
     @media (max-width: 580px) {
-      .custom-logo-img {
-        width: 200px;
-        height: 66px;
-      }
+      .custom-logo-img { width: 200px; height: 66px; }
     }
     @media (max-width: 460px) {
-      .custom-logo-img {
-        width: 160px;
-        height: 52px;
-      }
+      .custom-logo-img { width: 160px; height: 52px; }
     }
     
     .nav-bounds {
@@ -192,9 +211,7 @@
       width: 100%;
       max-width: 100%;
     }
-    .nav-logo-original {
-      display: none;
-    }
+    .nav-logo-original { display: none; }
     .nav-search { 
       flex: 1; 
       position: relative;
@@ -276,7 +293,6 @@
       canvas { width: 210px; height: 210px; }
       .nav-search { max-width: 200px; }
     }
-    /* Esconder elementos indesejados do ML */
     .nav-menu-cp, .user-menu-guest-item, .nav-menu-categories-link, .nav-categs, 
     a[href*="registration"], a[href*="login"], a[href*="purchases"] { display: none !important; }
   </style>
@@ -285,30 +301,12 @@
 
 <header class="nav-header">
   <div class="nav-bounds">
-    <!-- 
-      ============================================================
-      LOGO EM FORMATO DE IMAGEM .PNG (TAMANHO 260x84)
-      ============================================================
-      INSTRUÇÃO: Altere o atributo 'src' da imagem abaixo para o caminho 
-      do seu próprio arquivo .png.
-      
-      Exemplo de uso: 
-      - Se a imagem estiver na mesma pasta: src="minha-logo.png"
-      - Se estiver em uma subpasta: src="imagens/logo-mega.png"
-      - Se for um link externo: src="https://meusite.com/logo-mega.png"
-      
-      A imagem será exibida com largura 260px e altura 84px automaticamente
-      (mantendo proporção com object-fit: contain).
-      ============================================================
-    -->
     <a href="#" class="custom-logo" aria-label="Mega Ofertas Logo">
       <img class="custom-logo-img" 
            src="logo-mega-oferta.png" 
            alt="Mega Ofertas Logo"
            onerror="this.onerror=null; this.src='https://placehold.co/260x84/ffe600/663300?text=MegaOferta+PNG';">
     </a>
-    
-    <!-- Barra de pesquisa e carrinho simplificados -->
     <div class="nav-search">
       <input class="nav-search-input" placeholder="Buscar ofertas com frete grátis...">
       <button class="nav-search-btn">🔍</button>
@@ -339,7 +337,111 @@
 <button id="btnMegaCompra" class="btn-mega-compra">🛍️ VER PRODUTOS COM FRETE GRÁTIS + DESCONTOS 🚚</button>
 
 <script>
-  // ---------- LINKS REAIS PARA CADA PRODUTO (conforme solicitado) ----------
+  // ==============================================
+  // FUNÇÕES DE RASTREAMENTO TIKTOK PIXEL
+  // ==============================================
+  
+  function gerarEventID() {
+    return 'event_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+  
+  function trackTikTokPurchase(valor, produtoNome, currency = 'BRL') {
+    if (typeof ttq !== 'undefined') {
+      const eventID = gerarEventID();
+      ttq.track('Purchase', {
+        value: valor,
+        currency: currency,
+        content_name: produtoNome || 'Produto Mega Oferta',
+        content_type: 'product'
+      }, {
+        eventID: eventID,
+        test_event_code: 'TES143470'
+      });
+      console.log('✅ TikTok Pixel - Purchase rastreado:', produtoNome, 'Valor: R$', valor);
+    }
+  }
+  
+  function trackTikTokAddToCart(produtoNome, valor) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('AddToCart', {
+        value: valor,
+        currency: 'BRL',
+        content_name: produtoNome,
+        content_type: 'product'
+      });
+      console.log('🛒 TikTok Pixel - AddToCart rastreado:', produtoNome);
+    }
+  }
+  
+  function trackTikTokViewContent() {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('ViewContent', {
+        content_name: 'Catálogo de Ofertas com Frete Grátis',
+        content_type: 'product_group'
+      });
+      console.log('👁️ TikTok Pixel - ViewContent rastreado');
+    }
+  }
+  
+  function trackTikTokCompleteRegistration() {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('CompleteRegistration', {
+        status: 'frete_gratis_garantido',
+        content_name: 'Roleta Frete Grátis'
+      });
+      console.log('🎁 TikTok Pixel - CompleteRegistration rastreado');
+    }
+  }
+
+  // ==============================================
+  // FUNÇÕES DE RASTREAMENTO META PIXEL (Facebook)
+  // ==============================================
+  
+  function trackMetaPurchase(valor, produtoNome, currency = 'BRL') {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Purchase', {
+        value: valor,
+        currency: currency,
+        content_name: produtoNome,
+        content_type: 'product'
+      });
+      console.log('💰 Meta Pixel - Purchase rastreado:', produtoNome, 'Valor: R$', valor);
+    }
+  }
+  
+  function trackMetaAddToCart(produtoNome, valor) {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        value: valor,
+        currency: 'BRL',
+        content_name: produtoNome,
+        content_type: 'product'
+      });
+      console.log('🛒 Meta Pixel - AddToCart rastreado:', produtoNome);
+    }
+  }
+  
+  function trackMetaViewContent() {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: 'Catálogo de Ofertas com Frete Grátis',
+        content_type: 'product_group'
+      });
+      console.log('👁️ Meta Pixel - ViewContent rastreado');
+    }
+  }
+  
+  function trackMetaCompleteRegistration() {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'CompleteRegistration', {
+        status: 'frete_gratis_garantido',
+        content_name: 'Roleta Frete Grátis'
+      });
+      console.log('🎁 Meta Pixel - CompleteRegistration rastreado');
+    }
+  }
+
+  // ---------- LINKS REAIS PARA CADA PRODUTO ----------
   const linksProdutos = {
     "Capinha Silicone iPhone 12/13 Pro": "https://go.goatpayments.com.br/fco9nwgqhx",
     "Película de Vidro 9H": "https://go.goatpayments.com.br/aijxap2bn9",
@@ -373,7 +475,7 @@
     "Liquidificador Turbo 900W": "https://go.goatpayments.com.br/ql8drzjwa2"
   };
 
-  // ---------- ROLETA MAIS VISÍVEL (com descontos destacados nos segmentos) ----------
+  // ---------- ROLETA ----------
   let jaGirou = false;
   let giroConcluido = false;
   const canvas = document.getElementById('roletaCanvas');
@@ -385,7 +487,6 @@
   let girando = false;
   let animFrame = null;
   
-  // Segmentos com DESCONTOS ESCRITOS por extenso
   const segmentos = [
     { label: "10% OFF", cor: "#ff6b6b", desconto: "10%" },
     { label: "20% OFF", cor: "#4d96ff", desconto: "20%" },
@@ -395,7 +496,7 @@
     { label: "5% OFF", cor: "#a55dca", desconto: "5%" },
     { label: "DESCONTO ESPECIAL", cor: "#5f9ea0", desconto: "Extra!" }
   ];
-  const PREMIO_INDEX = 4; // index do frete grátis garantido
+  const PREMIO_INDEX = 4;
   const anguloPorSeg = (Math.PI * 2) / segmentos.length;
   
   function desenharRoleta() {
@@ -472,6 +573,8 @@
         btnGirar.textContent = "✅ FRETE GRÁTIS GARANTIDO! ✅";
         btnMega.style.display = "block";
         cancelAnimationFrame(animFrame);
+        trackTikTokCompleteRegistration();
+        trackMetaCompleteRegistration();
       }
     }
     animFrame = requestAnimationFrame(step);
@@ -495,6 +598,8 @@
     btnMega.style.display = "none";
     document.getElementById('promoBanner').style.display = 'block';
     renderizarCatalogo();
+    trackTikTokViewContent();
+    trackMetaViewContent();
   }
 
   // CATÁLOGO COMPLETO
@@ -569,13 +674,24 @@
               <span class="discount-price">R$ ${prod.final.toFixed(2)}</span>
             </div>
             <div class="free-ship">🚚 FRETE GRÁTIS</div>
-            <button class="btn-buy" data-url="${linkReal}">Comprar agora</button>
+            <button class="btn-buy" data-url="${linkReal}" data-produto="${prod.nome}" data-valor="${prod.final}">Comprar agora</button>
           </div>
         `;
         const btn = card.querySelector('.btn-buy');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const url = btn.getAttribute('data-url');
+          const produtoNome = btn.getAttribute('data-produto');
+          const produtoValor = parseFloat(btn.getAttribute('data-valor'));
+          
+          // RASTREAMENTO TikTok
+          trackTikTokAddToCart(produtoNome, produtoValor);
+          trackTikTokPurchase(produtoValor, produtoNome, 'BRL');
+          
+          // RASTREAMENTO Meta (Facebook)
+          trackMetaAddToCart(produtoNome, produtoValor);
+          trackMetaPurchase(produtoValor, produtoNome, 'BRL');
+          
           if(url && url !== "#") {
             window.open(url, '_blank');
           } else {
