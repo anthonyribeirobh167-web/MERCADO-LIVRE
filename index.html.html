@@ -12,26 +12,12 @@
       var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
       ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
       
-      // CARREGAMENTO DO PIXEL COM O ID CORRETO
       ttq.load('D7TEIHJC77U2TFGF5MH0');
       ttq.page();
       
-      // ==============================================
-      // EVENTO 1: ViewContent - Disparado quando a página carrega
-      // ==============================================
-      ttq.track('ViewContent', {
-        content_id: 'D7TEIHJC77U2TFGF5MH0',
-        content_type: 'product',
-        value: 97.00,
-        currency: 'BRL'
-      });
-      
-      console.log('✅ TikTok Pixel - Evento ViewContent disparado com sucesso!');
-      console.log('   content_id: D7TEIHJC77U2TFGF5MH0, value: R$ 97.00');
-      
+      console.log('✅ TikTok Pixel carregado! ID: D7TEIHJC77U2TFGF5MH0');
     }(window, document, 'ttq');
   </script>
-  <!-- TikTok Pixel Code End -->
   
   <!-- Meta Pixel Code -->
   <script>
@@ -47,16 +33,8 @@
     fbq('init', 'SEU_ID_DO_PIXEL_AQUI');
     fbq('track', 'PageView');
     
-    fbq('track', 'ViewContent', {
-      content_name: 'Mega Ofertas 80% OFF',
-      content_type: 'product',
-      value: 97.00,
-      currency: 'BRL'
-    });
-    
-    console.log("✅ Meta Pixel - ViewContent disparado!");
+    console.log("✅ Meta Pixel inicializado!");
   </script>
-  <!-- End Meta Pixel Code -->
   
   <style>
     * {
@@ -185,9 +163,6 @@
       transition: transform 0.2s ease;
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
     }
-    .custom-logo-img:hover {
-      transform: scale(1.02);
-    }
     @media (max-width: 580px) {
       .custom-logo-img { width: 200px; height: 66px; }
     }
@@ -238,6 +213,7 @@
       display: inline-flex;
       align-items: center;
     }
+    
     .container { padding: 16px 12px 24px; max-width: 100%; margin: 0 auto; }
     .promo-banner {
       background: linear-gradient(95deg, #0a2b1e, #0a5c3a);
@@ -260,7 +236,7 @@
     .category-section { margin-bottom: 42px; }
     .category-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 18px; padding-left: 12px; border-left: 6px solid #00a650; display: inline-block; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-top: 12px; }
-    .product-card { background: white; border-radius: 22px; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s; box-shadow: 0 6px 14px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+    .product-card { background: white; border-radius: 22px; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s; box-shadow: 0 6px 14px rgba(0,0,0,0.05); display: flex; flex-direction: column; cursor: pointer; }
     .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 24px rgba(0,0,0,0.12); }
     .product-img { width: 100%; aspect-ratio: 1 / 1; background: #f2f2f2; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .product-img img { width: 100%; height: 100%; object-fit: cover; }
@@ -270,33 +246,359 @@
     .old-price { font-size: 0.75rem; color: #888; text-decoration: line-through; }
     .discount-price { font-size: 1.35rem; font-weight: 800; color: #00a650; }
     .free-ship { background: #e6f7ec; color: #008c3e; font-size: 0.7rem; font-weight: bold; padding: 4px 10px; border-radius: 24px; display: inline-flex; align-items: center; gap: 5px; width: fit-content; margin: 8px 0; }
-    .big-discount {
+    .big-discount { background: #ff5722; color: white; font-size: 0.7rem; font-weight: bold; padding: 4px 10px; border-radius: 24px; display: inline-flex; margin: 8px 0; }
+    .btn-view { background: #3483fa; color: white; border: none; padding: 10px 12px; border-radius: 44px; font-weight: 700; margin-top: 12px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; width: 100%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .btn-view:hover { background: #2968c8; transform: scale(0.98); }
+    
+    /* TELA DE DETALHES */
+    .product-detail-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 1000;
+      overflow-y: auto;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.3s, opacity 0.3s;
+    }
+    .product-detail-overlay.ativo {
+      visibility: visible;
+      opacity: 1;
+    }
+    .detail-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    
+    /* BOTÃO VOLTAR DENTRO DA TELA DE DETALHE */
+    .btn-voltar-detalhe {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f2f5;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1f2c;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+    }
+    .btn-voltar-detalhe:hover {
+      background: #e0e4e9;
+      transform: translateX(-3px);
+    }
+    .btn-voltar-detalhe span {
+      font-size: 18px;
+    }
+    
+    .detail-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f5f5f5;
+      border-radius: 32px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .detail-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .detail-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #1a1f2c;
+    }
+    .detail-badge {
       background: #ff5722;
       color: white;
-      font-size: 0.7rem;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
       font-weight: bold;
-      padding: 4px 10px;
-      border-radius: 24px;
-      display: inline-flex;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .detail-price-row {
+      background: #f0fdf4;
+      padding: 16px;
+      border-radius: 20px;
+      margin: 16px 0;
+    }
+    .detail-old-price {
+      font-size: 1rem;
+      color: #888;
+      text-decoration: line-through;
+    }
+    .detail-discount-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #00a650;
+    }
+    .detail-ship {
+      background: #e6f7ec;
+      color: #008c3e;
+      padding: 10px 16px;
+      border-radius: 16px;
+      font-weight: bold;
+      margin: 16px 0;
+      text-align: center;
+    }
+    .detail-description {
+      margin: 20px 0;
+      padding: 16px;
+      background: #f8f9fc;
+      border-radius: 20px;
+    }
+    .detail-description h3 {
+      margin-bottom: 12px;
+      color: #1a1f2c;
+    }
+    .detail-description ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+    .detail-description li {
       margin: 8px 0;
+      line-height: 1.5;
     }
-    .btn-buy { 
-      background: #3483fa; 
-      color: white; 
-      border: none; 
-      padding: 10px 12px; 
-      border-radius: 44px; 
-      font-weight: 700; 
-      margin-top: 12px; 
-      cursor: pointer; 
-      transition: 0.2s; 
-      font-size: 0.85rem; 
-      width: 100%; 
-      text-align: center; 
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    .persuasive-description {
+      margin: 20px 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff9e6, #fff3d6);
+      border-radius: 20px;
+      border-left: 5px solid #ff8c00;
     }
-    .btn-buy:hover { background: #2968c8; transform: scale(0.98); }
+    .persuasive-description h3 {
+      color: #ff8c00;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .persuasive-description p {
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    .persuasive-description .highlight {
+      background: #ff8c0020;
+      padding: 10px;
+      border-radius: 12px;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #cc7000;
+    }
+    
+    .comments-section {
+      margin: 24px 0;
+      padding: 20px 16px;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid #eee;
+    }
+    .comments-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1a1f2c;
+    }
+    .comments-title span {
+      background: #00a650;
+      color: white;
+      font-size: 0.8rem;
+      padding: 2px 10px;
+      border-radius: 30px;
+    }
+    .comment-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .comment-card:last-child {
+      border-bottom: none;
+    }
+    .comment-header {
+      display: flex;
+      gap: 12px;
+    }
+    .comment-avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .comment-content {
+      flex: 1;
+    }
+    .comment-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #1a1f2c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .comment-stars {
+      color: #ffc107;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    .comment-text {
+      font-size: 0.85rem;
+      color: #444;
+      margin: 6px 0 4px;
+      line-height: 1.4;
+    }
+    .comment-date {
+      font-size: 0.7rem;
+      color: #999;
+    }
+    .comment-verified {
+      background: #e6f7ec;
+      color: #008c3e;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .comment-images {
+      margin-top: 12px;
+      margin-left: 56px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .comment-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid #e0e0e0;
+      background: #f9f9f9;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .comment-img:hover {
+      transform: scale(1.05);
+    }
+    .img-label {
+      font-size: 0.65rem;
+      color: #00a650;
+      margin-top: 4px;
+      text-align: center;
+    }
+    .img-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .rating-summary {
+      background: #f8f9fc;
+      padding: 12px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .rating-average {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffc107;
+    }
+    
+    .btn-comprar-agora {
+      background: linear-gradient(135deg, #00c853, #00a140);
+      color: white;
+      border: none;
+      padding: 18px 24px;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 7px 0 #007a30;
+      transition: 0.07s linear;
+    }
+    .btn-comprar-agora:active {
+      transform: translateY(4px);
+      box-shadow: 0 3px 0 #007a30;
+    }
+    .detail-guarantee {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .image-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .image-modal.ativo {
+      visibility: visible;
+      opacity: 1;
+    }
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    
+    .pixel-debug {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #1a1f2c;
+      color: #00ff88;
+      font-size: 10px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      z-index: 9999;
+      font-family: monospace;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    
     footer { background: #fff; border-top: 1px solid #e6e6e6; padding: 20px; text-align: center; font-size: 12px; color: #777; margin-top: 20px; }
+    
     @media (max-width: 480px) {
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .product-title { font-size: 0.8rem; }
@@ -306,10 +608,20 @@
       .roleta-container { max-width: 95%; padding: 16px; }
       canvas { width: 210px; height: 210px; }
       .nav-search { max-width: 200px; }
+      .comment-avatar { width: 36px; height: 36px; font-size: 14px; }
+      .comment-images { margin-left: 48px; }
+      .comment-img { width: 65px; height: 65px; }
+      .pixel-debug { font-size: 8px; bottom: 5px; right: 5px; }
     }
   </style>
 </head>
 <body>
+
+<div class="pixel-debug" id="pixelDebug">📡 TikTok Pixel: Monitorando...</div>
+
+<div id="imageModal" class="image-modal">
+  <img id="modalImage" src="" alt="Produto recebido">
+</div>
 
 <header class="nav-header">
   <div class="nav-bounds">
@@ -338,6 +650,10 @@
   </div>
 </main>
 
+<div id="productDetailOverlay" class="product-detail-overlay">
+  <div class="detail-container" id="detailContainer"></div>
+</div>
+
 <div id="roletaOverlay" class="overlay-roleta">
   <div class="roleta-container">
     <div class="roleta-titulo">🎁 GIRE & GANHE 🎁</div>
@@ -349,6 +665,111 @@
 </div>
 
 <script>
+  // ==============================================
+  // FUNÇÕES DOS EVENTOS DO TIKTOK PIXEL
+  // ==============================================
+  
+  const pixelDebug = document.getElementById('pixelDebug');
+  
+  function updateDebug(message, type = 'info') {
+    const colors = { info: '#00ff88', view: '#00b4d8', cart: '#ffaa00', complete: '#ff6b6b' };
+    pixelDebug.style.color = colors[type] || colors.info;
+    pixelDebug.innerHTML = `📡 TikTok: ${message}`;
+    console.log(`[TikTok Pixel] ${message}`);
+    setTimeout(() => {
+      pixelDebug.style.color = '#00ff88';
+      pixelDebug.innerHTML = '📡 TikTok Pixel: Monitorando...';
+    }, 3000);
+  }
+  
+  function dispararViewContent(produto) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('ViewContent', {
+        content_id: produto.nome,
+        content_type: 'product',
+        content_name: produto.nome,
+        value: produto.final,
+        currency: 'BRL',
+        price: produto.final,
+        quantity: 1
+      });
+      updateDebug(`ViewContent: ${produto.nome}`, 'view');
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: produto.nome,
+        content_type: 'product',
+        value: produto.final,
+        currency: 'BRL'
+      });
+    }
+  }
+  
+  function dispararAddToCart(produto, buttonElement = null) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('AddToCart', {
+        content_id: produto.nome,
+        content_type: 'product',
+        content_name: produto.nome,
+        value: produto.final,
+        currency: 'BRL',
+        price: produto.final,
+        quantity: 1
+      });
+      updateDebug(`AddToCart: ${produto.nome}`, 'cart');
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'AddToCart', {
+        content_name: produto.nome,
+        content_type: 'product',
+        value: produto.final,
+        currency: 'BRL'
+      });
+    }
+    
+    if (buttonElement) {
+      const originalText = buttonElement.innerHTML;
+      buttonElement.innerHTML = '✅ PRODUTO ADICIONADO!';
+      buttonElement.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        buttonElement.innerHTML = originalText;
+        buttonElement.style.transform = '';
+      }, 1500);
+    }
+  }
+  
+  function dispararInitiateCheckout(produto) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('InitiateCheckout', {
+        content_id: produto.nome,
+        content_type: 'product',
+        value: produto.final,
+        currency: 'BRL'
+      });
+      updateDebug(`InitiateCheckout: ${produto.nome}`, 'complete');
+    }
+  }
+  
+  function dispararCompletePayment(produto) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('CompletePayment', {
+        content_id: produto.nome,
+        content_type: 'product',
+        value: produto.final,
+        currency: 'BRL',
+        order_id: 'ORDER_' + Date.now()
+      });
+      updateDebug(`CompletePayment: ${produto.nome}`, 'complete');
+    }
+  }
+  
+  function dispararSearch(termo) {
+    if (typeof ttq !== 'undefined') {
+      ttq.track('Search', { search_string: termo });
+      updateDebug(`Search: "${termo}"`, 'info');
+    }
+  }
+
   // ---------- LINKS REAIS PARA CADA PRODUTO ----------
   const linksProdutos = {
     "Capinha Silicone iPhone 12/13 Pro": "https://go.goatpayments.com.br/fco9nwgqhx",
@@ -383,7 +804,157 @@
     "Liquidificador Turbo 900W": "https://go.goatpayments.com.br/ql8drzjwa2"
   };
 
-  // ---------- ROLETA COM 80% OFF ----------
+  // ---------- DESCRIÇÕES PERSUASIVAS ----------
+  const getDescricaoPersuasiva = (produtoNome, precoFinal) => {
+    const categorias = {
+      "Capinha": `✨ POR QUE VOCÊ VAI AMAR ESTA CAPINHA? ✨
+      
+📱 PROTEÇÃO TOTAL: Com bordas reforçadas e material de alta resistência.
+💎 DESIGN PREMIUM: Acabamento em silicone líquido que não desbota.
+🎯 ENCAIXE PERFEITO: Desenvolvida com moldes precisos.
+💰 POR APENAS R$ ${precoFinal.toFixed(2)} (80% OFF + FRETE GRÁTIS)!`,
+
+      "Película": `✨ PROTEÇÃO QUE VOCÊ MERECE! ✨
+🛡️ RESISTÊNCIA 9H: Dureza de safira, protegendo sua tela.
+👆 SENSIBILIDADE TOTAL: Você nem sente que tem uma película.
+🎁 BÔNUS EXCLUSIVO: Kit de instalação incluso!`,
+
+      "Fone": `🎧 EXPERIÊNCIA SONORA INCRÍVEL! 🎧
+🔊 SOM CRISTALINO: Grave profundo e agudo nítido.
+⚡ BLUETOOTH 5.3: Pareamento instantâneo.
+🔋 BATERIA DE LONGA DURAÇÃO: Até 6 horas de reprodução.`,
+
+      "Carregador": `⚡ CARREGAMENTO SUPERVELOZ! ⚡
+🔋 POWER DELIVERY: 0% a 50% em 30 minutos.
+🛡️ SEGURANÇA CERTIFICADA: Proteção contra sobrecarga.
+🌍 COMPATIBILIDADE UNIVERSAL: Funciona com todos dispositivos.`,
+
+      "Air Fryer": `🍟 FRITURA SAUDÁVEL E PRÁTICA! 🍗
+🔥 TECNOLOGIA AIR CIRCULATION: 99% menos óleo.
+🎛️ PAINEL DIGITAL: 8 programas pré-definidos.
+🍽️ CAPACIDADE FAMILIAR: 5 litros para toda família.`,
+
+      "Liquidificador": `🥤 POTÊNCIA QUE FAZ A DIFERENÇA! 🥭
+💪 MOTOR 700W: Tritura até os alimentos mais duros.
+🔪 LÂMINAS EM AÇO INOX: Tecnologia 4D.
+🔄 FUNÇÃO AUTO-LIMPEZA: Limpeza em 30 segundos.`,
+
+      "Speaker": `🔊 SOM QUE VIBRA! 🔊
+🎵 POTÊNCIA DE 30W: Grave potente.
+🌊 PROTEÇÃO IPX7: À prova de respingos.
+🌈 LEDS COLORIDOS: Luzes que dançam no ritmo!`
+    };
+
+    let categoria = "Capinha";
+    if (produtoNome.includes("Capinha")) categoria = "Capinha";
+    else if (produtoNome.includes("Película")) categoria = "Película";
+    else if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Headphone") || produtoNome.includes("Earbuds") || produtoNome.includes("Speaker") || produtoNome.includes("JBL")) categoria = "Fone";
+    else if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base") || produtoNome.includes("Power")) categoria = "Carregador";
+    else if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) categoria = "Air Fryer";
+    else if (produtoNome.includes("Liquidificador")) categoria = "Liquidificador";
+    
+    return categorias[categoria];
+  };
+
+  const imagensProdutoRecebido = [
+    "https://picsum.photos/id/1/200/200",
+    "https://picsum.photos/id/20/200/200",
+    "https://picsum.photos/id/26/200/200",
+    "https://picsum.photos/id/30/200/200",
+    "https://picsum.photos/id/34/200/200",
+    "https://picsum.photos/id/39/200/200",
+    "https://picsum.photos/id/41/200/200",
+    "https://picsum.photos/id/42/200/200",
+    "https://picsum.photos/id/45/200/200",
+    "https://picsum.photos/id/47/200/200"
+  ];
+
+  function getImagensAleatorias(seed) {
+    const idx1 = (seed * 7) % imagensProdutoRecebido.length;
+    let idx2 = (seed * 13 + 5) % imagensProdutoRecebido.length;
+    if (idx1 === idx2) idx2 = (idx2 + 1) % imagensProdutoRecebido.length;
+    return [imagensProdutoRecebido[idx1], imagensProdutoRecebido[idx2]];
+  }
+
+  const getComentarios = (produtoNome, seed) => {
+    const comentariosBase = {
+      "Capinha": [
+        { nome: "Rafaela M.", estrelas: 5, texto: "Produto excelente! A capinha encaixou perfeitamente no meu iPhone, material de qualidade!", data: "15/03/2025", verificado: true },
+        { nome: "Thiago L.", estrelas: 5, texto: "Melhor capinha que já comprei! O silicone é bem resistente. O preço com 80% OFF ficou imperdível.", data: "10/03/2025", verificado: true },
+        { nome: "Camila S.", estrelas: 4, texto: "Gostei muito, a cor é exatamente como na foto.", data: "05/03/2025", verificado: true },
+        { nome: "Felipe R.", estrelas: 5, texto: "Produto original e de ótima qualidade. Frete grátis é um diferencial enorme!", data: "28/02/2025", verificado: true },
+        { nome: "Juliana K.", estrelas: 5, texto: "Comprei para presentear e amei!", data: "20/02/2025", verificado: false },
+        { nome: "Marcelo A.", estrelas: 4, texto: "Boa capinha, bem resistente. Atendeu minhas expectativas.", data: "15/02/2025", verificado: true },
+        { nome: "Patrícia C.", estrelas: 5, texto: "Amei! Já é a segunda vez que compro. Loja confiável!", data: "10/02/2025", verificado: true }
+      ],
+      "Película": [
+        { nome: "André S.", estrelas: 5, texto: "Película de vidro de altíssima qualidade!", data: "12/03/2025", verificado: true },
+        { nome: "Fernanda L.", estrelas: 5, texto: "Fácil de instalar, veio com moldes auxiliares.", data: "08/03/2025", verificado: true },
+        { nome: "Rodrigo M.", estrelas: 4, texto: "Produto chegou bem embalado. Bom custo-benefício.", data: "01/03/2025", verificado: true },
+        { nome: "Amanda T.", estrelas: 5, texto: "Sensacional! A película de privacidade funciona muito bem.", data: "25/02/2025", verificado: true },
+        { nome: "Carlos D.", estrelas: 5, texto: "Melhor preço que encontrei. Valeu cada centavo.", data: "18/02/2025", verificado: false },
+        { nome: "Bruna F.", estrelas: 4, texto: "Muito boa! Depois que instalei ficou perfeita.", data: "12/02/2025", verificado: true },
+        { nome: "Leonardo J.", estrelas: 5, texto: "Produto incrível, recomendo fortemente!", data: "05/02/2025", verificado: true }
+      ],
+      "Fone": [
+        { nome: "Gabriel H.", estrelas: 5, texto: "Fone Bluetooth com som maravilhoso!", data: "14/03/2025", verificado: true },
+        { nome: "Larissa P.", estrelas: 5, texto: "Melhor compra que fiz esse ano!", data: "09/03/2025", verificado: true },
+        { nome: "Vinícius R.", estrelas: 4, texto: "Produto bom, conectividade estável.", data: "03/03/2025", verificado: true },
+        { nome: "Isabela C.", estrelas: 5, texto: "Amei! O grave é potente e os agudos são nítidos.", data: "27/02/2025", verificado: true },
+        { nome: "Rafael N.", estrelas: 5, texto: "Entregaram antes do prazo. Recomendo!", data: "19/02/2025", verificado: false },
+        { nome: "Tatiane S.", estrelas: 4, texto: "Bom fone, bateria de longa duração.", data: "14/02/2025", verificado: true },
+        { nome: "Eduardo G.", estrelas: 5, texto: "Fantástico! A qualidade do som me surpreendeu.", data: "07/02/2025", verificado: true }
+      ],
+      "Carregador": [
+        { nome: "Priscila M.", estrelas: 5, texto: "Carregador rápido de verdade!", data: "13/03/2025", verificado: true },
+        { nome: "Bruno A.", estrelas: 5, texto: "Ótimo produto, construção robusta.", data: "07/03/2025", verificado: true },
+        { nome: "Cristina L.", estrelas: 4, texto: "Funciona muito bem, atendeu perfeitamente.", data: "28/02/2025", verificado: true },
+        { nome: "Daniel V.", estrelas: 5, texto: "Carregador original e de qualidade.", data: "22/02/2025", verificado: true },
+        { nome: "Michele R.", estrelas: 5, texto: "Muito bom! Entrega rápida e frete grátis.", data: "16/02/2025", verificado: false },
+        { nome: "Sérgio T.", estrelas: 4, texto: "Produto atendeu minhas necessidades.", data: "11/02/2025", verificado: true },
+        { nome: "Vanessa M.", estrelas: 5, texto: "Perfeito! Recomendo esta loja.", data: "03/02/2025", verificado: true }
+      ],
+      "Air Fryer": [
+        { nome: "Roberta F.", estrelas: 5, texto: "Air Fryer maravilhosa!", data: "16/03/2025", verificado: true },
+        { nome: "Gustavo O.", estrelas: 5, texto: "Produto excelente, fácil de limpar.", data: "11/03/2025", verificado: true },
+        { nome: "Simone A.", estrelas: 4, texto: "Muito boa, funciona perfeitamente.", data: "04/03/2025", verificado: true },
+        { nome: "Andréia C.", estrelas: 5, texto: "Recomendo demais! Minha família amou.", data: "26/02/2025", verificado: true },
+        { nome: "Otávio S.", estrelas: 5, texto: "Melhor investimento que fiz na cozinha!", data: "20/02/2025", verificado: false },
+        { nome: "Nathalia P.", estrelas: 4, texto: "Produto bom, fácil de usar.", data: "13/02/2025", verificado: true },
+        { nome: "Ricardo L.", estrelas: 5, texto: "Simplesmente fantástica!", data: "06/02/2025", verificado: true }
+      ],
+      "Liquidificador": [
+        { nome: "Mariana B.", estrelas: 5, texto: "Liquidificador potente e super silencioso!", data: "17/03/2025", verificado: true },
+        { nome: "José R.", estrelas: 5, texto: "Produto de qualidade, lâminas muito afiadas.", data: "10/03/2025", verificado: true },
+        { nome: "Cláudia F.", estrelas: 4, texto: "Funciona bem e é bonito.", data: "06/03/2025", verificado: true },
+        { nome: "Luciano M.", estrelas: 5, texto: "Excelente! Liquidificador muito robusto.", data: "28/02/2025", verificado: true },
+        { nome: "Renata N.", estrelas: 5, texto: "Amei! É super prático e fácil de limpar.", data: "21/02/2025", verificado: false },
+        { nome: "Fábio G.", estrelas: 4, texto: "Bom produto, atende bem.", data: "15/02/2025", verificado: true },
+        { nome: "Lívia M.", estrelas: 5, texto: "Maravilhoso! Liquidificador 3 em 1.", data: "08/02/2025", verificado: true }
+      ]
+    };
+
+    let categoria = "Capinha";
+    if (produtoNome.includes("Capinha")) categoria = "Capinha";
+    else if (produtoNome.includes("Película")) categoria = "Película";
+    else if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Speaker") || produtoNome.includes("JBL")) categoria = "Fone";
+    else if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base") || produtoNome.includes("Power")) categoria = "Carregador";
+    else if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) categoria = "Air Fryer";
+    else if (produtoNome.includes("Liquidificador")) categoria = "Liquidificador";
+
+    const comentarios = comentariosBase[categoria] || comentariosBase.Capinha;
+    return comentarios.map((com, idx) => {
+      const imagens = getImagensAleatorias(seed + idx);
+      return { ...com, imagens };
+    });
+  };
+
+  const calcularMedia = (comentarios) => {
+    const soma = comentarios.reduce((acc, cur) => acc + cur.estrelas, 0);
+    return (soma / comentarios.length).toFixed(1);
+  };
+
+  // ---------- ROLETA ----------
   let jaGirou = false;
   let giroConcluido = false;
   
@@ -507,7 +1078,6 @@
     renderizarCatalogo();
   }
   
-  // Catálogo com produtos com 80% OFF
   const catalogoData = [
     { categoria: "🔋 Capinhas e Películas", produtos: [
       { nome: "Capinha Silicone iPhone 12/13 Pro", original: 199.90, final: 39.98, img: "29.png", desconto: "80%" },
@@ -553,6 +1123,181 @@
     ] }
   ];
   
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  
+  function abrirModal(imgSrc) {
+    modalImage.src = imgSrc;
+    imageModal.classList.add('ativo');
+  }
+  
+  function fecharModal() {
+    imageModal.classList.remove('ativo');
+  }
+  
+  imageModal.addEventListener('click', fecharModal);
+  
+  // Função para fechar os detalhes (voltar para vitrine)
+  function fecharDetalhes() {
+    const detailOverlay = document.getElementById('productDetailOverlay');
+    detailOverlay.classList.remove('ativo');
+    document.body.style.overflow = '';
+  }
+  
+  // Função para abrir tela de detalhes do produto
+  function abrirDetalhes(produto) {
+    const linkReal = linksProdutos[produto.nome] || "#";
+    const detailOverlay = document.getElementById('productDetailOverlay');
+    const detailContainer = document.getElementById('detailContainer');
+    
+    const seed = produto.nome.length + produto.final;
+    const comentarios = getComentarios(produto.nome, seed);
+    const mediaEstrelas = calcularMedia(comentarios);
+    const descricaoPersuasiva = getDescricaoPersuasiva(produto.nome, produto.final);
+    
+    // Disparar ViewContent
+    dispararViewContent(produto);
+    
+    const descricoes = {
+      default: "✅ Material Premium com alta durabilidade\n✅ Tecnologia de última geração\n✅ Compatível com diversos dispositivos\n✅ Garantia de 12 meses\n✅ Entrega rápida para todo Brasil",
+      "Capinha": "✅ Proteção 360 graus contra quedas\n✅ Material Silicone/Antialérgico\n✅ Acesso fácil a todas as portas e botões\n✅ Design elegante e moderno\n✅ Encaixe perfeito no dispositivo",
+      "Película": "✅ Proteção contra arranhões e impactos\n✅ Tecnologia 9H de dureza\n✅ Alta transparência e sensibilidade\n✅ Fácil instalação sem bolhas\n✅ Borda arredondada 2.5D",
+      "Carregador": "✅ Carregamento rápido e seguro\n✅ Proteção contra superaquecimento\n✅ Compatível com diversos dispositivos\n✅ Certificação de segurança\n✅ Cabo resistente incluso",
+      "Fone": "✅ Som de alta qualidade com graves potentes\n✅ Conexão Bluetooth estável\n✅ Bateria de longa duração\n✅ Conforto ergonômico\n✅ Microfone com cancelamento de ruído",
+      "Air Fryer": "✅ Fritadeira sem óleo e saudável\n✅ Painel digital touch screen\n✅ Timer automático com desligamento\n✅ Capacidade para toda família\n✅ Fácil limpeza com bandeja removível",
+      "Liquidificador": "✅ Potência de 700W a 900W\n✅ Lâminas em aço inoxidável\n✅ Multifuncional para diversas receitas\n✅ Fácil limpeza\n✅ Design compacto e moderno"
+    };
+    
+    let descricaoTexto = descricoes.default;
+    if(produto.nome.includes("Capinha")) descricaoTexto = descricoes.Capinha;
+    else if(produto.nome.includes("Película")) descricaoTexto = descricoes.Película;
+    else if(produto.nome.includes("Carregador") || produto.nome.includes("Cabo") || produto.nome.includes("Base") || produto.nome.includes("Power")) descricaoTexto = descricoes.Carregador;
+    else if(produto.nome.includes("Fone") || produto.nome.includes("AirPods") || produto.nome.includes("Headphone") || produto.nome.includes("Earbuds")) descricaoTexto = descricoes.Fone;
+    else if(produto.nome.includes("Air Fryer") || produto.nome.includes("Fritadeira")) descricaoTexto = descricoes.AirFryer;
+    else if(produto.nome.includes("Liquidificador")) descricaoTexto = descricoes.Liquidificador;
+    else if(produto.nome.includes("JBL") || produto.nome.includes("Speaker") || produto.nome.includes("Caixa") || produto.nome.includes("Soundbar")) descricaoTexto = descricoes.Fone;
+    
+    const descItens = descricaoTexto.split('\n').filter(item => item.trim());
+    
+    const comentariosHTML = comentarios.map((com, idx) => {
+      const imagensHTML = com.imagens.map((img, imgIdx) => `
+        <div class="img-wrapper">
+          <img class="comment-img" src="${img}" alt="Produto recebido" onclick="event.stopPropagation(); abrirModal('${img}')">
+          <div class="img-label">📦 Entregue</div>
+        </div>
+      `).join('');
+      
+      return `
+        <div class="comment-card">
+          <div class="comment-header">
+            <div class="comment-avatar">${com.nome.charAt(0)}</div>
+            <div class="comment-content">
+              <div class="comment-name">
+                ${com.nome}
+                <div class="comment-stars">${"★".repeat(com.estrelas)}${"☆".repeat(5-com.estrelas)}</div>
+                ${com.verificado ? '<span class="comment-verified">✓ Compra verificada</span>' : ''}
+              </div>
+              <div class="comment-text">"${com.texto}"</div>
+              <div class="comment-date">📅 ${com.data}</div>
+            </div>
+          </div>
+          <div class="comment-images">
+            ${imagensHTML}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+    const descricaoParaHTML = descricaoPersuasiva.replace(/\n/g, '<br>').replace(/✨/g, '<span style="font-size:1.2rem;">✨</span>');
+    
+    detailContainer.innerHTML = `
+      <!-- BOTÃO VOLTAR DENTRO DA TELA DE DETALHE -->
+      <button class="btn-voltar-detalhe" id="btnVoltarDetalhe">
+        <span>←</span> VOLTAR PARA TODOS OS PRODUTOS
+      </button>
+      
+      <div class="detail-img">
+        <img src="${produto.img}" alt="${produto.nome}" onerror="this.src='https://picsum.photos/id/20/300/300'">
+      </div>
+      <div class="detail-title">${produto.nome}</div>
+      <div class="detail-badge">⚡ ${produto.desconto} OFF + FRETE GRÁTIS ⚡</div>
+      
+      <div class="detail-price-row">
+        <span class="detail-old-price">De: R$ ${produto.original.toFixed(2)}</span><br>
+        <span class="detail-discount-price">Por: R$ ${produto.final.toFixed(2)}</span>
+        <div style="font-size:0.8rem; color:#00a650; margin-top:8px;">💰 Economia de R$ ${(produto.original - produto.final).toFixed(2)} (${produto.desconto} OFF)</div>
+      </div>
+      
+      <div class="detail-ship">
+        🚚 FRETE GRÁTIS para todo Brasil • Entrega Rápida
+      </div>
+      
+      <div class="detail-description">
+        <h3>📋 Sobre o produto:</h3>
+        <ul>
+          ${descItens.map(item => `<li>${item.trim()}</li>`).join('')}
+        </ul>
+      </div>
+      
+      <div class="persuasive-description">
+        <h3>💎 POR QUE VOCÊ PRECISA DESTE PRODUTO?</h3>
+        <p>${descricaoParaHTML}</p>
+        <div class="highlight">
+          ⚠️ ATENÇÃO: Esta oferta com 80% OFF + FRETE GRÁTIS é válida apenas para as primeiras 100 unidades!
+        </div>
+      </div>
+      
+      <div class="comments-section">
+        <div class="comments-title">
+          ⭐ Avaliações dos Clientes 
+          <span>${mediaEstrelas} ★</span>
+        </div>
+        <div class="rating-summary">
+          <div class="rating-average">${mediaEstrelas} ★</div>
+          <div style="color:#666;">${comentarios.length} avaliações • 98% recomendam</div>
+        </div>
+        ${comentariosHTML}
+      </div>
+      
+      <button class="btn-comprar-agora" data-url="${linkReal}" data-produto="${produto.nome}" data-valor="${produto.final}">
+        🛒 COMPRAR AGORA COM ${produto.desconto} OFF
+      </button>
+      <div class="detail-guarantee">
+        🔒 Compra 100% segura • Garantia de 7 dias • Parcele em até 6x
+      </div>
+    `;
+    
+    // Evento do botão voltar dentro da tela de detalhe
+    const btnVoltarDetalhe = detailContainer.querySelector('#btnVoltarDetalhe');
+    btnVoltarDetalhe.addEventListener('click', fecharDetalhes);
+    
+    // Evento do botão comprar
+    const btnComprar = detailContainer.querySelector('.btn-comprar-agora');
+    btnComprar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      
+      const produtoData = {
+        nome: produto.nome,
+        final: produto.final,
+        original: produto.original
+      };
+      
+      dispararAddToCart(produtoData, btnComprar);
+      dispararInitiateCheckout(produtoData);
+      
+      const url = btnComprar.getAttribute('data-url');
+      if(url && url !== "#") {
+        dispararCompletePayment(produtoData);
+        window.open(url, '_blank');
+      } else {
+        alert("Link promocional disponível em breve!");
+      }
+    });
+    
+    detailOverlay.classList.add('ativo');
+    document.body.style.overflow = 'hidden';
+  }
+  
   function renderizarCatalogo() {
     const container = document.getElementById('catalogoContainer');
     if(!container) return;
@@ -569,7 +1314,6 @@
       for(let prod of cat.produtos) {
         const card = document.createElement('div');
         card.className = 'product-card';
-        const linkReal = linksProdutos[prod.nome] || "#";
         card.innerHTML = `
           <div class="product-img"><img src="${prod.img}" alt="${prod.nome}" loading="lazy" onerror="this.src='https://picsum.photos/id/20/200/200'"></div>
           <div class="product-info">
@@ -580,51 +1324,15 @@
               <span class="discount-price">R$ ${prod.final.toFixed(2)}</span>
             </div>
             <div class="free-ship">🚚 FRETE GRÁTIS</div>
-            <button class="btn-buy" data-url="${linkReal}" data-produto="${prod.nome}" data-valor="${prod.final}">COMPRAR COM 80% OFF</button>
+            <button class="btn-view" data-produto='${JSON.stringify(prod)}'>👁️ VER PRODUTO</button>
           </div>
         `;
-        const btn = card.querySelector('.btn-buy');
-        
-        // ==============================================
-        // EVENTO 2: AddToCart - Disparado quando clica no botão de compra
-        // ==============================================
+        const btn = card.querySelector('.btn-view');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          
-          // DISPARA O EVENTO ADDTOCART PARA O TIKTOK PIXEL
-          if (typeof ttq !== 'undefined') {
-            ttq.track('AddToCart', {
-              content_id: 'D7TEIHJC77U2TFGF5MH0',
-              content_type: 'product',
-              value: prod.final,
-              currency: 'BRL'
-            });
-            console.log('🛒 TikTok Pixel - Evento AddToCart disparado!');
-            console.log('   content_id: D7TEIHJC77U2TFGF5MH0, value: R$ ' + prod.final);
-          } else {
-            console.warn('⚠️ TikTok Pixel não encontrado!');
-          }
-          
-          // DISPARA O EVENTO ADDTOCART PARA O META PIXEL (FACEBOOK)
-          if (typeof fbq !== 'undefined') {
-            fbq('track', 'AddToCart', { 
-              value: prod.final, 
-              currency: 'BRL', 
-              content_name: prod.nome, 
-              content_type: 'product' 
-            });
-            console.log('💰 Meta Pixel - AddToCart disparado para:', prod.nome);
-          }
-          
-          // ABRE O LINK DO PRODUTO
-          const url = btn.getAttribute('data-url');
-          if(url && url !== "#") {
-            window.open(url, '_blank');
-          } else {
-            alert("Link promocional disponível em breve!");
-          }
+          const produtoData = JSON.parse(btn.getAttribute('data-produto'));
+          abrirDetalhes(produtoData);
         });
-        
         grid.appendChild(card);
       }
       section.appendChild(grid);
@@ -634,7 +1342,28 @@
     if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   
-  // Eventos principais
+  // Evento de busca
+  const searchInput = document.querySelector('.nav-search-input');
+  const searchBtn = document.querySelector('.nav-search-btn');
+  
+  searchBtn.addEventListener('click', () => {
+    const termo = searchInput.value.trim();
+    if (termo) {
+      dispararSearch(termo);
+      alert(`Buscando por: "${termo}"\nEvento de busca enviado ao TikTok Pixel!`);
+    }
+  });
+  
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const termo = searchInput.value.trim();
+      if (termo) {
+        dispararSearch(termo);
+        alert(`Buscando por: "${termo}"\nEvento de busca enviado ao TikTok Pixel!`);
+      }
+    }
+  });
+  
   window.addEventListener('DOMContentLoaded', () => {
     exibirRoleta();
     
@@ -653,6 +1382,8 @@
         alert("⚡ Gire a roleta primeiro para liberar as ofertas de 80% OFF!"); 
       }
     });
+    
+    updateDebug('Pixel carregado - Pronto para rastrear!', 'info');
   });
 </script>
 <footer>
