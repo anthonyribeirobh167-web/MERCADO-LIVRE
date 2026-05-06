@@ -5,125 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | Descontos + Frete Grátis</title>
   
-  <!-- TikTok Pixel Code Start -->
+  <!-- TikTok Pixel Code - ID: D7SKF7JC77U1G0JPMTI0 -->
   <script>
-    // Função utilitária para eventos do TikTok Pixel
-    window.tiktokEvents = {
-      // Armazena se os produtos já foram visualizados
-      productsViewed: false,
-      
-      // Disparar ClickButton
-      clickButton: function(buttonName) {
-        if (typeof ttq !== 'undefined') {
-          ttq.track('ClickButton', {
-            content_name: buttonName,
-            content_type: 'button'
-          });
-          console.log('🎯 TikTok Pixel - ClickButton disparado:', buttonName);
-        }
-      },
-      
-      // Disparar ViewContent
-      viewContent: function(contentName, contentId, contentPrice = null) {
-        if (typeof ttq !== 'undefined') {
-          const eventData = {
-            contents: [{
-              content_id: contentId,
-              content_name: contentName,
-              content_type: 'product'
-            }],
-            content_type: 'product'
-          };
-          
-          if (contentPrice) {
-            eventData.value = contentPrice;
-            eventData.currency = 'BRL';
-          }
-          
-          ttq.track('ViewContent', eventData);
-          console.log('👁️ TikTok Pixel - ViewContent disparado:', contentName);
-        }
-      },
-      
-      // Disparar AddToCart (se necessário)
-      addToCart: function(productName, productId, productPrice) {
-        if (typeof ttq !== 'undefined') {
-          ttq.track('AddToCart', {
-            contents: [{
-              content_id: productId,
-              content_name: productName,
-              content_type: 'product',
-              quantity: 1,
-              price: productPrice
-            }],
-            value: productPrice,
-            currency: 'BRL'
-          });
-          console.log('🛒 TikTok Pixel - AddToCart disparado:', productName);
-        }
-      },
-      
-      // Disparar InitiateCheckout
-      initiateCheckout: function(productName, productId, productPrice, productQuantity = 1) {
-        if (typeof ttq !== 'undefined') {
-          ttq.track('InitiateCheckout', {
-            contents: [{
-              content_id: productId,
-              content_name: productName,
-              content_type: 'product',
-              quantity: productQuantity,
-              price: productPrice
-            }],
-            value: productPrice * productQuantity,
-            currency: 'BRL'
-          });
-          console.log('💳 TikTok Pixel - InitiateCheckout disparado:', productName, 'Valor: R$', productPrice);
-        }
-      },
-      
-      // Disparar CompletePayment (apenas na página de confirmação)
-      completePayment: function(orderId, totalValue, products) {
-        if (typeof ttq !== 'undefined') {
-          const contents = products.map(p => ({
-            content_id: p.id,
-            content_name: p.name,
-            content_type: 'product',
-            quantity: p.quantity,
-            price: p.price
-          }));
-          
-          ttq.track('CompletePayment', {
-            contents: contents,
-            value: totalValue,
-            currency: 'BRL',
-            order_id: orderId
-          });
-          console.log('✅ TikTok Pixel - CompletePayment disparado! Pedido:', orderId, 'Total: R$', totalValue);
-        }
-      },
-      
-      // Resetar flag de produtos visualizados
-      resetProductsViewed: function() {
-        this.productsViewed = false;
-      }
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+    ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+    ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}; 
+    for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+    ttq.load=function(e,n){
+      var r="https://analytics.tiktok.com/i18n/pixel/events.js";
+      var o=n&&n.partner;
+      ttq._i=ttq._i||{};
+      ttq._i[e]=[];
+      ttq._i[e]._u=r;
+      ttq._t=ttq._t||{};
+      ttq._t[e]=+new Date;
+      ttq._o=ttq._o||{};
+      ttq._o[e]=n||{};
+      n=document.createElement("script");
+      n.type="text/javascript";
+      n.async=!0;
+      n.src=r+"?sdkid="+e+"&lib="+t;
+      e=document.getElementsByTagName("script")[0];
+      e.parentNode.insertBefore(n,e);
     };
-    
-    // Carregar TikTok Pixel
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-      var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-      ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-      
-      // Substitua pelo seu TikTok Pixel ID
-      ttq.load('D7SKET3C77U99QEMNJR0');
-      ttq.page();
-      console.log('✅ TikTok Pixel carregado - PageView disparado');
-      
-    }(window, document, 'ttq');
+
+    // 🔵 SEU TIKTOK PIXEL ID - CONFIGURADO
+    ttq.load('D7SKF7JC77U1G0JPMTI0');
+    ttq.page();
+    console.log('✅ TikTok Pixel carregado - ID: D7SKF7JC77U1G0JPMTI0');
+
+    // Evento ViewContent inicial
+    ttq.track('ViewContent', {
+      contents: [{
+        content_type: 'product_group',
+        content_id: 'mega_ofertas_home'
+      }],
+      content_type: 'product_group'
+    });
+
+  }(window, document, 'ttq');
+
+  // ✅ Suporte para Test Event Code
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const testCode = params.get('tt_test_id');
+    if(testCode && typeof ttq !== 'undefined'){
+      ttq.set('test_event_code', testCode);
+      console.log('🧪 Modo de teste TikTok ativo:', testCode);
+    }
+  })();
   </script>
-  <!-- TikTok Pixel Code End -->
   
-  <!-- Meta Pixel Code -->
+  <!-- Meta Pixel Code (Substitua pelo seu ID) -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -134,26 +68,11 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // Substitua pelo seu Meta Pixel ID
+    // 🔴 ATENÇÃO: Substitua pelo seu Meta Pixel ID (Facebook)
     fbq('init', 'D7SKF7JC77U1G0JPMTI0');
     fbq('track', 'PageView');
-    
-    // Função para Meta Pixel também
-    window.metaEvents = {
-      initiateCheckout: function(productName, productPrice) {
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'InitiateCheckout', {
-            value: productPrice,
-            currency: 'BRL',
-            content_name: productName,
-            content_type: 'product'
-          });
-          console.log('💰 Meta Pixel - InitiateCheckout disparado');
-        }
-      }
-    };
+    console.log('✅ Meta Pixel carregado');
   </script>
-  <!-- End Meta Pixel Code -->
   
   <style>
     * {
@@ -315,7 +234,6 @@
       width: 100%;
       max-width: 100%;
     }
-    .nav-logo-original { display: none; }
     .nav-search { 
       flex: 1; 
       position: relative;
@@ -350,6 +268,7 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       display: inline-flex;
       align-items: center;
+      cursor: pointer;
     }
     .container { padding: 16px 12px 24px; max-width: 100%; margin: 0 auto; }
     .promo-banner {
@@ -395,8 +314,12 @@
       canvas { width: 210px; height: 210px; }
       .nav-search { max-width: 200px; }
     }
-    .nav-menu-cp, .user-menu-guest-item, .nav-menu-categories-link, .nav-categs, 
-    a[href*="registration"], a[href*="login"], a[href*="purchases"] { display: none !important; }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
@@ -405,15 +328,14 @@
   <div class="nav-bounds">
     <a href="#" class="custom-logo" aria-label="Mega Ofertas Logo">
       <img class="custom-logo-img" 
-           src="999.png" 
-           alt="Mega Ofertas Logo"
-           onerror="this.onerror=null; this.src='https://placehold.co/260x84/ffe600/663300?text=MegaOferta+PNG';">
+           src="https://placehold.co/260x84/ffe600/663300?text=MegaOferta" 
+           alt="Mega Ofertas Logo">
     </a>
     <div class="nav-search">
-      <input class="nav-search-input" placeholder="Buscar ofertas com frete grátis...">
-      <button class="nav-search-btn">🔍</button>
+      <input class="nav-search-input" id="searchInput" placeholder="Buscar ofertas com frete grátis...">
+      <button class="nav-search-btn" id="searchBtn">🔍</button>
     </div>
-    <a href="#" class="cart-icon">🛒</a>
+    <div class="cart-icon" id="cartIcon">🛒</div>
   </div>
 </header>
 
@@ -439,7 +361,97 @@
 <button id="btnMegaCompra" class="btn-mega-compra">🛍️ VER PRODUTOS COM FRETE GRÁTIS + DESCONTOS 🚚</button>
 
 <script>
-  // ---------- LINKS REAIS PARA CADA PRODUTO ----------
+  // ============================================
+  // TIKTOK PIXEL - FUNIL COMPLETO DE EVENTOS
+  // ============================================
+  window.tiktokEvents = {
+    productsViewed: false,
+    
+    // Evento: ClickButton
+    clickButton: function(buttonName) {
+      if (typeof ttq !== 'undefined') {
+        ttq.track('ClickButton', {
+          content_name: buttonName,
+          content_type: 'button'
+        });
+        console.log('🎯 TikTok Pixel - ClickButton:', buttonName);
+      }
+    },
+    
+    // Evento: ViewContent
+    viewContent: function(productName, productId, productPrice) {
+      if (typeof ttq !== 'undefined') {
+        ttq.track('ViewContent', {
+          contents: [{
+            content_id: productId,
+            content_name: productName,
+            content_type: 'product'
+          }],
+          content_type: 'product',
+          value: productPrice,
+          currency: 'BRL'
+        });
+        console.log('👁️ TikTok Pixel - ViewContent:', productName);
+      }
+    },
+    
+    // Evento: InitiateCheckout
+    initiateCheckout: function(productName, productId, productPrice, quantity = 1) {
+      if (typeof ttq !== 'undefined') {
+        ttq.track('InitiateCheckout', {
+          contents: [{
+            content_id: productId,
+            content_name: productName,
+            content_type: 'product',
+            quantity: quantity,
+            price: productPrice
+          }],
+          value: productPrice * quantity,
+          currency: 'BRL'
+        });
+        console.log('💳 TikTok Pixel - InitiateCheckout:', productName, 'R$', productPrice);
+      }
+      // Meta Pixel
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          value: productPrice * quantity,
+          currency: 'BRL',
+          content_name: productName,
+          content_type: 'product'
+        });
+      }
+    },
+    
+    // Evento: CompletePayment (para página de obrigado)
+    completePayment: function(orderId, totalValue, products) {
+      if (typeof ttq !== 'undefined') {
+        const contents = products.map(p => ({
+          content_id: p.id,
+          content_name: p.name,
+          content_type: 'product',
+          quantity: p.quantity,
+          price: p.price
+        }));
+        ttq.track('CompletePayment', {
+          contents: contents,
+          value: totalValue,
+          currency: 'BRL',
+          order_id: orderId
+        });
+        console.log('✅ TikTok Pixel - CompletePayment! Pedido:', orderId);
+      }
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase', {
+          value: totalValue,
+          currency: 'BRL'
+        });
+      }
+    }
+  };
+
+  // ============================================
+  // LINKS DOS PRODUTOS
+  // ============================================
   const linksProdutos = {
     "Capinha Silicone iPhone 12/13 Pro": "https://go.goatpayments.com.br/fco9nwgqhx",
     "Película de Vidro 9H": "https://go.goatpayments.com.br/aijxap2bn9",
@@ -473,7 +485,9 @@
     "Liquidificador Turbo 900W": "https://go.goatpayments.com.br/ql8drzjwa2"
   };
 
-  // ---------- ROLETA COM EVENTO DE CLICK ----------
+  // ============================================
+  // ROLETA
+  // ============================================
   let jaGirou = false;
   let giroConcluido = false;
   const canvas = document.getElementById('roletaCanvas');
@@ -490,9 +504,9 @@
     { label: "20% OFF", cor: "#4d96ff", desconto: "20%" },
     { label: "30% OFF", cor: "#ffb347", desconto: "30%" },
     { label: "50% OFF", cor: "#20c997", desconto: "50%" },
-    { label: "FRETE GRÁTIS TOTAL", cor: "#f7b731", especial: true, desconto: "Frete Grátis" },
+    { label: "FRETE GRÁTIS", cor: "#f7b731", desconto: "Frete Grátis" },
     { label: "5% OFF", cor: "#a55dca", desconto: "5%" },
-    { label: "DESCONTO ESPECIAL", cor: "#5f9ea0", desconto: "Extra!" }
+    { label: "15% OFF", cor: "#5f9ea0", desconto: "15%" }
   ];
   const PREMIO_INDEX = 4;
   const anguloPorSeg = (Math.PI * 2) / segmentos.length;
@@ -513,15 +527,9 @@
       ctx.rotate(inicio + anguloPorSeg/2);
       ctx.fillStyle = "#fff";
       ctx.font = "bold 12px 'Segoe UI', system-ui";
-      ctx.shadowBlur = 0;
       let txt = segmentos[i].label;
       if(txt.length > 12) txt = txt.slice(0,10)+"..";
       ctx.fillText(txt, raio*0.62, 6);
-      if(segmentos[i].desconto && segmentos[i].desconto !== "Frete Grátis") {
-        ctx.font = "bold 9px 'Segoe UI'";
-        ctx.fillStyle = "#fff8e0";
-        ctx.fillText(segmentos[i].desconto, raio*0.62, 22);
-      }
       ctx.restore();
     }
     ctx.beginPath();
@@ -529,7 +537,6 @@
     ctx.lineTo(centroX, centroY-raio+6);
     ctx.lineTo(centroX+12, centroY-raio-8);
     ctx.fillStyle = "#ffea80";
-    ctx.shadowBlur = 6;
     ctx.fill();
     ctx.beginPath();
     ctx.moveTo(centroX-6, centroY-raio-12);
@@ -537,13 +544,12 @@
     ctx.lineTo(centroX+6, centroY-raio-12);
     ctx.fillStyle = "#ffb347";
     ctx.fill();
-    ctx.shadowBlur = 0;
   }
   
   function girarRoleta() {
     if(girando || jaGirou) return;
     
-    // 🎯 EVENTO 2: ClickButton no GIRAR ROLETA
+    // 🎯 EVENTO: ClickButton
     window.tiktokEvents.clickButton('girar_roleta');
     
     jaGirou = true;
@@ -582,7 +588,6 @@
   
   function exibirRoleta() {
     overlay.classList.add('ativo');
-    document.body.classList.add('roleta-ativa');
     anguloAtual = Math.random() * 2 * Math.PI;
     desenharRoleta();
     jaGirou = false; 
@@ -594,83 +599,95 @@
   
   function fecharRoletaEMostrarCatalogo() {
     overlay.classList.remove('ativo');
-    document.body.classList.remove('roleta-ativa');
     btnMega.style.display = "none";
     document.getElementById('promoBanner').style.display = 'block';
     renderizarCatalogo();
   }
 
-  // CATÁLOGO COMPLETO
+  // ============================================
+  // CATÁLOGO
+  // ============================================
   const catalogoData = [
-    { categoria: "🔋 Capinhas e Películas", produtos: [
-      { nome: "Capinha Silicone iPhone 12/13 Pro", original: 40, final: 23, img: "29.png" },
-      { nome: "Película de Vidro 9H", original: 50, final: 29.99, img: "44.png" },
-      { nome: "Capinha MagSafe Translúcida", original: 30, final: 15, img: "27.png" },
-      { nome: "Película Privacidade iPhone 14 Pro", original: 50, final: 28, img: "26.png" },
-      { nome: "Capinha Bumper Anti-Quedas", original: 100, final: 47.90, img: "25.png" }
+    { categoria: "📱 Capinhas e Películas", produtos: [
+      { nome: "Capinha Silicone iPhone 12/13 Pro", original: 40, final: 23, img: "https://placehold.co/200x200/ff6b6b/white?text=Capinha" },
+      { nome: "Película de Vidro 9H", original: 50, final: 29.99, img: "https://placehold.co/200x200/4d96ff/white?text=Pelicula" },
+      { nome: "Capinha MagSafe Translúcida", original: 30, final: 15, img: "https://placehold.co/200x200/20c997/white?text=MagSafe" },
+      { nome: "Capinha Bumper Anti-Quedas", original: 100, final: 47.90, img: "https://placehold.co/200x200/a55dca/white?text=Bumper" }
     ] },
-    { categoria: "⚡ Carregadores e Cabos", produtos: [
-      { nome: "Carregador USB-C 20W Original", original: 50, final: 28, img: "24.png" },
-      { nome: "Carregador Rápido 30W GaN", original: 90.99, final: 69.90, img: "23.png" },
-      { nome: "Cabo Lightning 2m Original", original: 79, final: 37.90, img: "22.png" },
-      { nome: "Base Carregadora MagSafe 15W", original: 200, final: 50, img: "88.png" },
-      { nome: "Power Bank 10000mAh", original: 70, final: 37.89, img: "20.png" }
+    { categoria: "⚡ Carregadores", produtos: [
+      { nome: "Carregador USB-C 20W", original: 50, final: 28, img: "https://placehold.co/200x200/f7b731/white?text=Carregador" },
+      { nome: "Carregador Rápido 30W GaN", original: 90.99, final: 69.90, img: "https://placehold.co/200x200/ff6b6b/white?text=GaN" },
+      { nome: "Base MagSafe 15W", original: 200, final: 50, img: "https://placehold.co/200x200/20c997/white?text=Base" },
+      { nome: "Power Bank 10000mAh", original: 70, final: 37.89, img: "https://placehold.co/200x200/ffb347/white?text=PowerBank" }
     ] },
     { categoria: "🎧 Fones Bluetooth", produtos: [
-      { nome: "AirPods Pro (2ª Geração)", original: 350, final: 59.78, img: "18.png" },
-      { nome: "Fone Bluetooth 5.3 ANC", original: 50, final: 28, img: "15.png" },
-      { nome: "Headphone Over-Ear", original: 300, final: 120.89, img: "19.png" },
-      { nome: "Earbuds Esportivos", original: 67.90, final: 49.35, img: "17.png" },
-      { nome: "Fone Intra-auricular Bass", original: 35, final: 16, img: "16.png" }
-    ] },
-    { categoria: "🔊 Caixas de Som", produtos: [
-      { nome: "JBL Flip 6 Bluetooth", original: 500, final: 248.61, img: "11.png" },
-      { nome: "Speaker 30W RGB", original: 260, final: 100, img: "14.png" },
-      { nome: "Caixa de Som Portátil 20W", original: 60, final: 26.98, img: "12.png" },
-      { nome: "Mini Speaker com Bass", original: 30, final: 16, img: "13.png" },
-      { nome: "Soundbar Compacta USB", original: 678, final: 450, img: "100.png" }
+      { nome: "AirPods Pro (2ª Geração)", original: 350, final: 59.78, img: "https://placehold.co/200x200/a55dca/white?text=AirPods" },
+      { nome: "Fone Bluetooth 5.3 ANC", original: 50, final: 28, img: "https://placehold.co/200x200/f7b731/white?text=Fone+ANC" },
+      { nome: "Headphone Over-Ear", original: 300, final: 120.89, img: "https://placehold.co/200x200/ff6b6b/white?text=Headphone" }
     ] },
     { categoria: "🍗 Air Fryers", produtos: [
-      { nome: "Air Fryer 5L Digital", original: 578, final: 149.98, img: "09.png" },
-      { nome: "Fritadeira Sem Óleo 6L", original: 460, final: 127.82, img: "06.png" },
-      { nome: "Air Fryer Oven 8L", original: 800, final: 444.41, img: "10.png" },
-      { nome: "Mini Air Fryer 2L", original: 350, final: 99.90, img: "07.png" },
-      { nome: "Fritadeira 4L Painel Touch", original: 359, final: 135.97, img: "08.png" }
+      { nome: "Air Fryer 5L Digital", original: 578, final: 149.98, img: "https://placehold.co/200x200/20c997/white?text=AirFryer" },
+      { nome: "Fritadeira Sem Óleo 6L", original: 460, final: 127.82, img: "https://placehold.co/200x200/ffb347/white?text=Fritadeira" },
+      { nome: "Mini Air Fryer 2L", original: 350, final: 99.90, img: "https://placehold.co/200x200/f7b731/white?text=Mini+Air" }
     ] },
     { categoria: "🥤 Liquidificadores", produtos: [
-      { nome: "Liquidificador 700W", original: 240, final: 100.90, img: "05.png" },
-      { nome: "Liquidificador Profissional", original: 400, final: 178.61, img: "04.png" },
-      { nome: "Liquidificador 3 em 1", original: 289, final: 120.71, img: "03.png" },
-      { nome: "Mini Liquidificador Portátil", original: 100, final: 25, img: "02.png" },
-      { nome: "Liquidificador Turbo 900W", original: 59.90, final: 20.90, img: "01.png" }
+      { nome: "Liquidificador 700W", original: 240, final: 100.90, img: "https://placehold.co/200x200/4d96ff/white?text=Liquidificador" },
+      { nome: "Liquidificador Profissional", original: 400, final: 178.61, img: "https://placehold.co/200x200/20c997/white?text=Profissional" },
+      { nome: "Mini Liquidificador", original: 100, final: 25, img: "https://placehold.co/200x200/a55dca/white?text=Mini" }
     ] }
   ];
 
   let produtosRenderizados = false;
+  let currentFilter = '';
   
   function renderizarCatalogo() {
     const container = document.getElementById('catalogoContainer');
     if(!container) return;
     container.innerHTML = '';
     
+    let produtosFiltrados = [];
     for(let cat of catalogoData) {
+      for(let prod of cat.produtos) {
+        produtosFiltrados.push({ ...prod, categoria: cat.categoria });
+      }
+    }
+    
+    if (currentFilter) {
+      produtosFiltrados = produtosFiltrados.filter(p => 
+        p.nome.toLowerCase().includes(currentFilter.toLowerCase()) ||
+        p.categoria.toLowerCase().includes(currentFilter.toLowerCase())
+      );
+    }
+    
+    if (produtosFiltrados.length === 0) {
+      container.innerHTML = '<div class="no-results">🔍 Nenhum produto encontrado. Tente outra busca!</div>';
+      return;
+    }
+    
+    const produtosPorCategoria = {};
+    for(let prod of produtosFiltrados) {
+      if (!produtosPorCategoria[prod.categoria]) produtosPorCategoria[prod.categoria] = [];
+      produtosPorCategoria[prod.categoria].push(prod);
+    }
+    
+    for(let catNome in produtosPorCategoria) {
       const section = document.createElement('section');
       section.className = 'category-section';
       const title = document.createElement('h2');
       title.className = 'category-title';
-      title.innerText = cat.categoria;
+      title.innerText = catNome;
       section.appendChild(title);
       const grid = document.createElement('div');
       grid.className = 'products-grid';
       
-      for(let prod of cat.produtos) {
+      for(let prod of produtosPorCategoria[catNome]) {
         const card = document.createElement('div');
         card.className = 'product-card';
         const linkReal = linksProdutos[prod.nome] || "#";
         const productId = prod.nome.replace(/\s+/g, '_').toLowerCase();
         
         card.innerHTML = `
-          <div class="product-img"><img src="${prod.img}" alt="${prod.nome}" loading="lazy" onerror="this.src='https://picsum.photos/id/20/200/200'"></div>
+          <div class="product-img"><img src="${prod.img}" alt="${prod.nome}" loading="lazy"></div>
           <div class="product-info">
             <div class="product-title">${prod.nome}</div>
             <div class="price-row">
@@ -690,17 +707,11 @@
           const productPrice = parseFloat(btn.getAttribute('data-valor'));
           const productId = btn.getAttribute('data-id');
           
-          // 🎯 EVENTO 4: InitiateCheckout no clique do COMPRAR AGORA
+          // 🎯 EVENTO: InitiateCheckout
           window.tiktokEvents.initiateCheckout(productName, productId, productPrice, 1);
-          
-          // Meta Pixel também
-          if (typeof window.metaEvents !== 'undefined') {
-            window.metaEvents.initiateCheckout(productName, productPrice);
-          }
           
           const url = btn.getAttribute('data-url');
           if(url && url !== "#") {
-            // Pequeno delay para garantir que o evento seja enviado
             setTimeout(() => {
               window.open(url, '_blank');
             }, 100);
@@ -715,57 +726,38 @@
       container.appendChild(section);
     }
     
-    // 🎯 EVENTO 3: ViewContent ao exibir produtos (apenas uma vez)
+    // 🎯 EVENTO: ViewContent (apenas uma vez)
     if (!produtosRenderizados) {
       produtosRenderizados = true;
-      
-      // Disparar ViewContent para cada categoria/produto
       for(let cat of catalogoData) {
         for(let prod of cat.produtos) {
           const productId = prod.nome.replace(/\s+/g, '_').toLowerCase();
           window.tiktokEvents.viewContent(prod.nome, productId, prod.final);
         }
       }
-      
-      console.log('📦 TikTok Pixel - ViewContent disparado para todos os produtos');
+      console.log('📦 ViewContent disparado para todos os produtos');
     }
-    
-    const banner = document.getElementById('promoBanner');
-    if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function removerIndesejados() {
-    document.querySelectorAll('.nav-menu-cp, .user-menu-guest-item, .nav-menu-categories-link, .nav-categs, a[href*="registration"], a[href*="login"]').forEach(el => el.remove());
-    const links = document.querySelectorAll('a, span, div');
-    const textos = ['CEP','Crie sua conta','Entre','Compras','Mercado Play','Contato','Moda','Vender','Supermercado','Cupons','Ofertas','Categorias'];
-    links.forEach(el => {
-      let txt = el.innerText?.trim();
-      if(txt && textos.some(p => txt === p || (txt.includes(p) && p.length>2 && txt.length < 35))) {
-        if(el.tagName==='A') el.style.display='none';
-        else if(el.children.length===0) el.style.display='none';
-      }
-    });
   }
   
-  // Função para verificar se está na página de confirmação de pagamento
-  // Esta função deve ser chamada na página de "Obrigado" ou confirmação de compra
+  function filtrarProdutos() {
+    currentFilter = document.getElementById('searchInput').value;
+    renderizarCatalogo();
+  }
+
+  // Função para página de confirmação
   window.checkoutComplete = function(orderId, totalValue, products) {
-    // 🎯 EVENTO 5: CompletePayment (apenas na página de confirmação!)
-    if (typeof window.tiktokEvents !== 'undefined') {
-      window.tiktokEvents.completePayment(orderId, totalValue, products);
-    }
-    console.log('🎉 CompletePayment disparado - Pedido finalizado com sucesso!');
+    window.tiktokEvents.completePayment(orderId, totalValue, products);
   };
 
+  // ============================================
+  // INICIALIZAÇÃO
+  // ============================================
   window.addEventListener('DOMContentLoaded', () => {
-    removerIndesejados();
     exibirRoleta();
-    
-    // 👍 EVENTO 1: PageView já foi disparado no carregamento do pixel
     
     btnGirar.addEventListener('click', () => { 
       if(!girando && !jaGirou) {
-        girarRoleta(); // O evento ClickButton está DENTRO da função girarRoleta()
+        girarRoleta();
       } else if(jaGirou) {
         alert("🎉 Você já garantiu o frete grátis! Clique em 'VER PRODUTOS' para aproveitar.");
       }
@@ -775,40 +767,20 @@
       if(giroConcluido || jaGirou) {
         fecharRoletaEMostrarCatalogo();
       } else {
-        alert("⚡ Gire a roleta primeiro para liberar os preços com frete grátis!");
+        alert("⚡ Gire a roleta primeiro para liberar os preços!");
       }
+    });
+    
+    document.getElementById('searchBtn').addEventListener('click', filtrarProdutos);
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') filtrarProdutos();
     });
   });
 </script>
 
-<!-- Script de exemplo para página de confirmação (CompletePayment) -->
-<!--
-  COLOQUE ESTE CÓDIGO NA PÁGINA DE "OBRIGADO" OU CONFIRMAÇÃO DE COMPRA:
-
-  <script>
-    if (window.opener || window.parent !== window) {
-      // Página de confirmação
-      const orderId = 'PEDIDO_123456'; // Substitua pelo ID real do pedido
-      const totalValue = 123.45; // Substitua pelo valor total
-      const products = [
-        { id: 'produto_1', name: 'Nome do Produto', quantity: 1, price: 99.90 }
-      ];
-      
-      if (window.opener && window.opener.checkoutComplete) {
-        window.opener.checkoutComplete(orderId, totalValue, products);
-      } else if (window.parent && window.parent.checkoutComplete) {
-        window.parent.checkoutComplete(orderId, totalValue, products);
-      } else {
-        // Fallback: disparar diretamente
-        if (typeof window.tiktokEvents !== 'undefined') {
-          window.tiktokEvents.completePayment(orderId, totalValue, products);
-        }
-      }
-    }
-  </script>
--->
 <footer>
-  <p>© 2025 Mega Ofertas - Frete Grátis + Descontos exclusivos via roleta</p>
+  <p>© 2025 Mega Ofertas - Frete Grátis + Descontos exclusivos</p>
+  <p style="font-size: 10px; margin-top: 8px;">TikTok Pixel ID: D7SKF7JC77U1G0JPMTI0</p>
 </footer>
 </body>
 </html>
