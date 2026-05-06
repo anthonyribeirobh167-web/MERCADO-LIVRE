@@ -5,26 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | 80% OFF + Frete Grátis</title>
   
-  <!-- TikTok Pixel Code Start -->
+  <!-- TikTok Pixel Code Start - NOVO ID INTEGRADO -->
   <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
       var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
       ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
       
-      ttq.load('D7SKET3C77U99QEMNJR0');
+      // NOVO ID DO TIKTOK PIXEL
+      ttq.load('D7TEIHJC77U2TFGF5MH0');
       ttq.page();
 
+      // Evento de Visualização para e-commerce
       ttq.track('ViewContent', {
         contents: [
           {
             content_type: 'product_group',
-            content_id: 'mega_oferta_principal' 
+            content_id: 'mega_oferta_80_off' 
           }
         ],
         content_type: 'product_group'
       });
-      console.log('✅ TikTok Pixel - ViewContent disparado');
+      console.log('✅ TikTok Pixel - ViewContent disparado com ID: D7TEIHJC77U2TFGF5MH0');
       
     }(window, document, 'ttq');
   </script>
@@ -41,12 +43,13 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
+    // INICIALIZAÇÃO DO SEU PIXEL - Substitua pelo número do seu Pixel do Facebook
     fbq('init', 'SEU_ID_DO_PIXEL_AQUI');
     fbq('track', 'PageView');
 
     function dispararTesteMeta() {
       fbq('track', 'ViewContent', {
-        content_name: 'Pagina de Ofertas'
+        content_name: 'Pagina de Ofertas 80% OFF'
       }, {
         test_event_code: 'TES143470'
       });
@@ -467,6 +470,9 @@
         btnGirar.disabled = true;
         btnGirar.style.display = 'none';
         btnLiberarOferta.style.display = 'block';
+        
+        // Disparar evento personalizado de conclusão da roleta
+        console.log('🎡 Roleta concluída - 80% OFF garantido!');
         cancelAnimationFrame(animFrame);
       }
     }
@@ -571,21 +577,42 @@
         const btn = card.querySelector('.btn-buy');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
+          
+          // Disparar evento AddToCart para TikTok Pixel
           if (typeof ttq !== 'undefined') {
             ttq.track('AddToCart', {
-              contents: [{ content_id: prod.nome.replace(/\s+/g, '_').toLowerCase(), content_name: prod.nome, content_type: 'product', quantity: 1, price: prod.final }],
+              contents: [
+                { 
+                  content_id: prod.nome.replace(/\s+/g, '_').toLowerCase(), 
+                  content_name: prod.nome, 
+                  content_type: 'product', 
+                  quantity: 1, 
+                  price: prod.final 
+                }
+              ],
               value: prod.final,
               currency: 'BRL'
             });
-            console.log('🛒 TikTok Pixel - AddToCart:', prod.nome);
+            console.log('🛒 TikTok Pixel - AddToCart disparado para:', prod.nome, 'Valor: R$', prod.final);
           }
+          
+          // Disparar evento AddToCart para Meta Pixel (Facebook)
           if (typeof fbq !== 'undefined') {
-            fbq('track', 'AddToCart', { value: prod.final, currency: 'BRL', content_name: prod.nome, content_type: 'product' });
-            console.log('💰 Meta Pixel - AddToCart:', prod.nome);
+            fbq('track', 'AddToCart', { 
+              value: prod.final, 
+              currency: 'BRL', 
+              content_name: prod.nome, 
+              content_type: 'product' 
+            });
+            console.log('💰 Meta Pixel - AddToCart disparado para:', prod.nome);
           }
+          
           const url = btn.getAttribute('data-url');
-          if(url && url !== "#") window.open(url, '_blank');
-          else alert("Link promocional disponível em breve!");
+          if(url && url !== "#") {
+            window.open(url, '_blank');
+          } else {
+            alert("Link promocional disponível em breve!");
+          }
         });
         grid.appendChild(card);
       }
@@ -596,18 +623,24 @@
     if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   
-  // Eventos
+  // Eventos principais
   window.addEventListener('DOMContentLoaded', () => {
     exibirRoleta();
     
     btnGirar.addEventListener('click', () => { 
-      if(!girando && !jaGirou) girarRoleta(); 
-      else if(jaGirou) alert("🎉 Você já girou! Clique em 'LIBERAR OFERTA' para continuar."); 
+      if(!girando && !jaGirou) {
+        girarRoleta();
+      } else if(jaGirou) {
+        alert("🎉 Você já girou! Clique em 'LIBERAR OFERTA' para ver os produtos com 80% OFF.");
+      } 
     });
     
     btnLiberarOferta.addEventListener('click', () => { 
-      if(giroConcluido || jaGirou) liberarCatalogo(); 
-      else alert("⚡ Gire a roleta primeiro para liberar as ofertas de 80% OFF!"); 
+      if(giroConcluido || jaGirou) {
+        liberarCatalogo();
+      } else { 
+        alert("⚡ Gire a roleta primeiro para liberar as ofertas de 80% OFF!"); 
+      }
     });
   });
 </script>
