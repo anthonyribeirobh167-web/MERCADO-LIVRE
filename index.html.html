@@ -250,7 +250,6 @@
     .btn-view { background: #3483fa; color: white; border: none; padding: 10px 12px; border-radius: 44px; font-weight: 700; margin-top: 12px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; width: 100%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     .btn-view:hover { background: #2968c8; transform: scale(0.98); }
     
-    /* TELA DE DETALHES */
     .product-detail-overlay {
       position: fixed;
       top: 0;
@@ -274,7 +273,6 @@
       padding: 20px 16px 40px;
     }
     
-    /* BOTÃO VOLTAR DENTRO DA TELA DE DETALHE */
     .btn-voltar-detalhe {
       display: inline-flex;
       align-items: center;
@@ -806,54 +804,31 @@
 
   // ---------- DESCRIÇÕES PERSUASIVAS ----------
   const getDescricaoPersuasiva = (produtoNome, precoFinal) => {
-    const categorias = {
-      "Capinha": `✨ POR QUE VOCÊ VAI AMAR ESTA CAPINHA? ✨
+    if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) {
+      return `🍟 FRITURA SAUDÁVEL E PRÁTICA! 🍗
       
-📱 PROTEÇÃO TOTAL: Com bordas reforçadas e material de alta resistência.
-💎 DESIGN PREMIUM: Acabamento em silicone líquido que não desbota.
-🎯 ENCAIXE PERFEITO: Desenvolvida com moldes precisos.
-💰 POR APENAS R$ ${precoFinal.toFixed(2)} (80% OFF + FRETE GRÁTIS)!`,
+🔥 TECNOLOGIA AIR CIRCULATION: Fritura com 99% menos óleo, mantendo o sabor e a crocância dos alimentos. Sua saúde agradece!
 
-      "Película": `✨ PROTEÇÃO QUE VOCÊ MERECE! ✨
-🛡️ RESISTÊNCIA 9H: Dureza de safira, protegendo sua tela.
-👆 SENSIBILIDADE TOTAL: Você nem sente que tem uma película.
-🎁 BÔNUS EXCLUSIVO: Kit de instalação incluso!`,
+🎛️ PAINEL DIGITAL TOUCH: Programas pré-definidos (batata frita, frango, bolo, peixe, legumes). Só selecionar e esperar!
 
-      "Fone": `🎧 EXPERIÊNCIA SONORA INCRÍVEL! 🎧
-🔊 SOM CRISTALINO: Grave profundo e agudo nítido.
-⚡ BLUETOOTH 5.3: Pareamento instantâneo.
-🔋 BATERIA DE LONGA DURAÇÃO: Até 6 horas de reprodução.`,
+⏱️ TIMER DE 60 MINUTOS: Desligamento automático com alarme. Não precisa ficar vigiando.
 
-      "Carregador": `⚡ CARREGAMENTO SUPERVELOZ! ⚡
-🔋 POWER DELIVERY: 0% a 50% em 30 minutos.
-🛡️ SEGURANÇA CERTIFICADA: Proteção contra sobrecarga.
-🌍 COMPATIBILIDADE UNIVERSAL: Funciona com todos dispositivos.`,
+🍽️ CAPACIDADE FAMILIAR: Espaço suficiente para preparar refeições para toda família.
 
-      "Air Fryer": `🍟 FRITURA SAUDÁVEL E PRÁTICA! 🍗
-🔥 TECNOLOGIA AIR CIRCULATION: 99% menos óleo.
-🎛️ PAINEL DIGITAL: 8 programas pré-definidos.
-🍽️ CAPACIDADE FAMILIAR: 5 litros para toda família.`,
+🧼 FÁCIL LIMPEZA: Cesto antiaderente removível e lavável.
 
-      "Liquidificador": `🥤 POTÊNCIA QUE FAZ A DIFERENÇA! 🥭
-💪 MOTOR 700W: Tritura até os alimentos mais duros.
-🔪 LÂMINAS EM AÇO INOX: Tecnologia 4D.
-🔄 FUNÇÃO AUTO-LIMPEZA: Limpeza em 30 segundos.`,
-
-      "Speaker": `🔊 SOM QUE VIBRA! 🔊
-🎵 POTÊNCIA DE 30W: Grave potente.
-🌊 PROTEÇÃO IPX7: À prova de respingos.
-🌈 LEDS COLORIDOS: Luzes que dançam no ritmo!`
-    };
-
-    let categoria = "Capinha";
-    if (produtoNome.includes("Capinha")) categoria = "Capinha";
-    else if (produtoNome.includes("Película")) categoria = "Película";
-    else if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Headphone") || produtoNome.includes("Earbuds") || produtoNome.includes("Speaker") || produtoNome.includes("JBL")) categoria = "Fone";
-    else if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base") || produtoNome.includes("Power")) categoria = "Carregador";
-    else if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) categoria = "Air Fryer";
-    else if (produtoNome.includes("Liquidificador")) categoria = "Liquidificador";
+⚡ PREÇO DE LANÇAMENTO: De R$ 450 por apenas R$ ${precoFinal.toFixed(2)} com FRETE GRÁTIS!`;
+    }
     
-    return categorias[categoria];
+    return `✨ PRODUTO DE QUALIDADE! ✨
+    
+✅ Material Premium com alta durabilidade
+✅ Tecnologia de última geração
+✅ Compatível com diversos dispositivos
+✅ Garantia de 12 meses
+✅ Entrega rápida para todo Brasil
+
+💰 APENAS R$ ${precoFinal.toFixed(2)} (80% OFF + FRETE GRÁTIS)!`;
   };
 
   const imagensProdutoRecebido = [
@@ -877,75 +852,19 @@
   }
 
   const getComentarios = (produtoNome, seed) => {
-    const comentariosBase = {
-      "Capinha": [
-        { nome: "Rafaela M.", estrelas: 5, texto: "Produto excelente! A capinha encaixou perfeitamente no meu iPhone, material de qualidade!", data: "15/03/2025", verificado: true },
-        { nome: "Thiago L.", estrelas: 5, texto: "Melhor capinha que já comprei! O silicone é bem resistente. O preço com 80% OFF ficou imperdível.", data: "10/03/2025", verificado: true },
-        { nome: "Camila S.", estrelas: 4, texto: "Gostei muito, a cor é exatamente como na foto.", data: "05/03/2025", verificado: true },
-        { nome: "Felipe R.", estrelas: 5, texto: "Produto original e de ótima qualidade. Frete grátis é um diferencial enorme!", data: "28/02/2025", verificado: true },
-        { nome: "Juliana K.", estrelas: 5, texto: "Comprei para presentear e amei!", data: "20/02/2025", verificado: false },
-        { nome: "Marcelo A.", estrelas: 4, texto: "Boa capinha, bem resistente. Atendeu minhas expectativas.", data: "15/02/2025", verificado: true },
-        { nome: "Patrícia C.", estrelas: 5, texto: "Amei! Já é a segunda vez que compro. Loja confiável!", data: "10/02/2025", verificado: true }
-      ],
-      "Película": [
-        { nome: "André S.", estrelas: 5, texto: "Película de vidro de altíssima qualidade!", data: "12/03/2025", verificado: true },
-        { nome: "Fernanda L.", estrelas: 5, texto: "Fácil de instalar, veio com moldes auxiliares.", data: "08/03/2025", verificado: true },
-        { nome: "Rodrigo M.", estrelas: 4, texto: "Produto chegou bem embalado. Bom custo-benefício.", data: "01/03/2025", verificado: true },
-        { nome: "Amanda T.", estrelas: 5, texto: "Sensacional! A película de privacidade funciona muito bem.", data: "25/02/2025", verificado: true },
-        { nome: "Carlos D.", estrelas: 5, texto: "Melhor preço que encontrei. Valeu cada centavo.", data: "18/02/2025", verificado: false },
-        { nome: "Bruna F.", estrelas: 4, texto: "Muito boa! Depois que instalei ficou perfeita.", data: "12/02/2025", verificado: true },
-        { nome: "Leonardo J.", estrelas: 5, texto: "Produto incrível, recomendo fortemente!", data: "05/02/2025", verificado: true }
-      ],
-      "Fone": [
-        { nome: "Gabriel H.", estrelas: 5, texto: "Fone Bluetooth com som maravilhoso!", data: "14/03/2025", verificado: true },
-        { nome: "Larissa P.", estrelas: 5, texto: "Melhor compra que fiz esse ano!", data: "09/03/2025", verificado: true },
-        { nome: "Vinícius R.", estrelas: 4, texto: "Produto bom, conectividade estável.", data: "03/03/2025", verificado: true },
-        { nome: "Isabela C.", estrelas: 5, texto: "Amei! O grave é potente e os agudos são nítidos.", data: "27/02/2025", verificado: true },
-        { nome: "Rafael N.", estrelas: 5, texto: "Entregaram antes do prazo. Recomendo!", data: "19/02/2025", verificado: false },
-        { nome: "Tatiane S.", estrelas: 4, texto: "Bom fone, bateria de longa duração.", data: "14/02/2025", verificado: true },
-        { nome: "Eduardo G.", estrelas: 5, texto: "Fantástico! A qualidade do som me surpreendeu.", data: "07/02/2025", verificado: true }
-      ],
-      "Carregador": [
-        { nome: "Priscila M.", estrelas: 5, texto: "Carregador rápido de verdade!", data: "13/03/2025", verificado: true },
-        { nome: "Bruno A.", estrelas: 5, texto: "Ótimo produto, construção robusta.", data: "07/03/2025", verificado: true },
-        { nome: "Cristina L.", estrelas: 4, texto: "Funciona muito bem, atendeu perfeitamente.", data: "28/02/2025", verificado: true },
-        { nome: "Daniel V.", estrelas: 5, texto: "Carregador original e de qualidade.", data: "22/02/2025", verificado: true },
-        { nome: "Michele R.", estrelas: 5, texto: "Muito bom! Entrega rápida e frete grátis.", data: "16/02/2025", verificado: false },
-        { nome: "Sérgio T.", estrelas: 4, texto: "Produto atendeu minhas necessidades.", data: "11/02/2025", verificado: true },
-        { nome: "Vanessa M.", estrelas: 5, texto: "Perfeito! Recomendo esta loja.", data: "03/02/2025", verificado: true }
-      ],
-      "Air Fryer": [
-        { nome: "Roberta F.", estrelas: 5, texto: "Air Fryer maravilhosa!", data: "16/03/2025", verificado: true },
-        { nome: "Gustavo O.", estrelas: 5, texto: "Produto excelente, fácil de limpar.", data: "11/03/2025", verificado: true },
-        { nome: "Simone A.", estrelas: 4, texto: "Muito boa, funciona perfeitamente.", data: "04/03/2025", verificado: true },
-        { nome: "Andréia C.", estrelas: 5, texto: "Recomendo demais! Minha família amou.", data: "26/02/2025", verificado: true },
-        { nome: "Otávio S.", estrelas: 5, texto: "Melhor investimento que fiz na cozinha!", data: "20/02/2025", verificado: false },
-        { nome: "Nathalia P.", estrelas: 4, texto: "Produto bom, fácil de usar.", data: "13/02/2025", verificado: true },
-        { nome: "Ricardo L.", estrelas: 5, texto: "Simplesmente fantástica!", data: "06/02/2025", verificado: true }
-      ],
-      "Liquidificador": [
-        { nome: "Mariana B.", estrelas: 5, texto: "Liquidificador potente e super silencioso!", data: "17/03/2025", verificado: true },
-        { nome: "José R.", estrelas: 5, texto: "Produto de qualidade, lâminas muito afiadas.", data: "10/03/2025", verificado: true },
-        { nome: "Cláudia F.", estrelas: 4, texto: "Funciona bem e é bonito.", data: "06/03/2025", verificado: true },
-        { nome: "Luciano M.", estrelas: 5, texto: "Excelente! Liquidificador muito robusto.", data: "28/02/2025", verificado: true },
-        { nome: "Renata N.", estrelas: 5, texto: "Amei! É super prático e fácil de limpar.", data: "21/02/2025", verificado: false },
-        { nome: "Fábio G.", estrelas: 4, texto: "Bom produto, atende bem.", data: "15/02/2025", verificado: true },
-        { nome: "Lívia M.", estrelas: 5, texto: "Maravilhoso! Liquidificador 3 em 1.", data: "08/02/2025", verificado: true }
-      ]
-    };
+    const comentariosAirFryer = [
+      { nome: "Roberta F.", estrelas: 5, texto: "Air Fryer maravilhosa! Já testei várias receitas e ficaram crocantes e saudáveis.", data: "16/03/2025", verificado: true },
+      { nome: "Gustavo O.", estrelas: 5, texto: "Produto excelente, fácil de limpar e muito prática. O desconto de 80% foi imperdível!", data: "11/03/2025", verificado: true },
+      { nome: "Simone A.", estrelas: 4, texto: "Muito boa, funciona perfeitamente. Minha família adorou!", data: "04/03/2025", verificado: true },
+      { nome: "Andréia C.", estrelas: 5, texto: "Recomendo demais! Agora comemos de forma mais saudável.", data: "26/02/2025", verificado: true },
+      { nome: "Otávio S.", estrelas: 5, texto: "Melhor investimento que fiz na cozinha! Chegou em perfeito estado.", data: "20/02/2025", verificado: false },
+      { nome: "Nathalia P.", estrelas: 4, texto: "Produto bom, fácil de usar. Atendeu minhas expectativas.", data: "13/02/2025", verificado: true },
+      { nome: "Ricardo L.", estrelas: 5, texto: "Simplesmente fantástica! Fritura sem óleo com muito sabor.", data: "06/02/2025", verificado: true }
+    ];
 
-    let categoria = "Capinha";
-    if (produtoNome.includes("Capinha")) categoria = "Capinha";
-    else if (produtoNome.includes("Película")) categoria = "Película";
-    else if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Speaker") || produtoNome.includes("JBL")) categoria = "Fone";
-    else if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base") || produtoNome.includes("Power")) categoria = "Carregador";
-    else if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) categoria = "Air Fryer";
-    else if (produtoNome.includes("Liquidificador")) categoria = "Liquidificador";
-
-    const comentarios = comentariosBase[categoria] || comentariosBase.Capinha;
-    return comentarios.map((com, idx) => {
+    return comentariosAirFryer.map((com, idx) => {
       const imagens = getImagensAleatorias(seed + idx);
-      return { ...com, imagens };
+      return { ...com, imagenes: imagens };
     });
   };
 
@@ -1144,8 +1063,10 @@
     document.body.style.overflow = '';
   }
   
-  // Função para abrir tela de detalhes do produto
+  // Função para abrir tela de detalhes do produto - CORRIGIDA
   function abrirDetalhes(produto) {
+    console.log("Abrindo detalhes do produto:", produto);
+    
     const linkReal = linksProdutos[produto.nome] || "#";
     const detailOverlay = document.getElementById('productDetailOverlay');
     const detailContainer = document.getElementById('detailContainer');
@@ -1158,29 +1079,16 @@
     // Disparar ViewContent
     dispararViewContent(produto);
     
-    const descricoes = {
-      default: "✅ Material Premium com alta durabilidade\n✅ Tecnologia de última geração\n✅ Compatível com diversos dispositivos\n✅ Garantia de 12 meses\n✅ Entrega rápida para todo Brasil",
-      "Capinha": "✅ Proteção 360 graus contra quedas\n✅ Material Silicone/Antialérgico\n✅ Acesso fácil a todas as portas e botões\n✅ Design elegante e moderno\n✅ Encaixe perfeito no dispositivo",
-      "Película": "✅ Proteção contra arranhões e impactos\n✅ Tecnologia 9H de dureza\n✅ Alta transparência e sensibilidade\n✅ Fácil instalação sem bolhas\n✅ Borda arredondada 2.5D",
-      "Carregador": "✅ Carregamento rápido e seguro\n✅ Proteção contra superaquecimento\n✅ Compatível com diversos dispositivos\n✅ Certificação de segurança\n✅ Cabo resistente incluso",
-      "Fone": "✅ Som de alta qualidade com graves potentes\n✅ Conexão Bluetooth estável\n✅ Bateria de longa duração\n✅ Conforto ergonômico\n✅ Microfone com cancelamento de ruído",
-      "Air Fryer": "✅ Fritadeira sem óleo e saudável\n✅ Painel digital touch screen\n✅ Timer automático com desligamento\n✅ Capacidade para toda família\n✅ Fácil limpeza com bandeja removível",
-      "Liquidificador": "✅ Potência de 700W a 900W\n✅ Lâminas em aço inoxidável\n✅ Multifuncional para diversas receitas\n✅ Fácil limpeza\n✅ Design compacto e moderno"
-    };
-    
-    let descricaoTexto = descricoes.default;
-    if(produto.nome.includes("Capinha")) descricaoTexto = descricoes.Capinha;
-    else if(produto.nome.includes("Película")) descricaoTexto = descricoes.Película;
-    else if(produto.nome.includes("Carregador") || produto.nome.includes("Cabo") || produto.nome.includes("Base") || produto.nome.includes("Power")) descricaoTexto = descricoes.Carregador;
-    else if(produto.nome.includes("Fone") || produto.nome.includes("AirPods") || produto.nome.includes("Headphone") || produto.nome.includes("Earbuds")) descricaoTexto = descricoes.Fone;
-    else if(produto.nome.includes("Air Fryer") || produto.nome.includes("Fritadeira")) descricaoTexto = descricoes.AirFryer;
-    else if(produto.nome.includes("Liquidificador")) descricaoTexto = descricoes.Liquidificador;
-    else if(produto.nome.includes("JBL") || produto.nome.includes("Speaker") || produto.nome.includes("Caixa") || produto.nome.includes("Soundbar")) descricaoTexto = descricoes.Fone;
-    
-    const descItens = descricaoTexto.split('\n').filter(item => item.trim());
+    const descricoesAirFryer = [
+      "✅ Fritadeira sem óleo e saudável",
+      "✅ Painel digital touch screen",
+      "✅ Timer automático com desligamento",
+      "✅ Capacidade para toda família",
+      "✅ Fácil limpeza com bandeja removível"
+    ];
     
     const comentariosHTML = comentarios.map((com, idx) => {
-      const imagensHTML = com.imagens.map((img, imgIdx) => `
+      const imagensHTML = com.imagenes.map((img, imgIdx) => `
         <div class="img-wrapper">
           <img class="comment-img" src="${img}" alt="Produto recebido" onclick="event.stopPropagation(); abrirModal('${img}')">
           <div class="img-label">📦 Entregue</div>
@@ -1211,7 +1119,6 @@
     const descricaoParaHTML = descricaoPersuasiva.replace(/\n/g, '<br>').replace(/✨/g, '<span style="font-size:1.2rem;">✨</span>');
     
     detailContainer.innerHTML = `
-      <!-- BOTÃO VOLTAR DENTRO DA TELA DE DETALHE -->
       <button class="btn-voltar-detalhe" id="btnVoltarDetalhe">
         <span>←</span> VOLTAR PARA TODOS OS PRODUTOS
       </button>
@@ -1235,7 +1142,7 @@
       <div class="detail-description">
         <h3>📋 Sobre o produto:</h3>
         <ul>
-          ${descItens.map(item => `<li>${item.trim()}</li>`).join('')}
+          ${descricoesAirFryer.map(item => `<li>${item}</li>`).join('')}
         </ul>
       </div>
       
@@ -1298,10 +1205,12 @@
     document.body.style.overflow = 'hidden';
   }
   
+  // Função para renderizar o catálogo - CORRIGIDA
   function renderizarCatalogo() {
     const container = document.getElementById('catalogoContainer');
     if(!container) return;
     container.innerHTML = '';
+    
     for(let cat of catalogoData) {
       const section = document.createElement('section');
       section.className = 'category-section';
@@ -1311,9 +1220,20 @@
       section.appendChild(title);
       const grid = document.createElement('div');
       grid.className = 'products-grid';
+      
       for(let prod of cat.produtos) {
         const card = document.createElement('div');
         card.className = 'product-card';
+        
+        // Criar o card sem usar JSON.stringify no data-produto para evitar problemas
+        const produtoData = {
+          nome: prod.nome,
+          original: prod.original,
+          final: prod.final,
+          img: prod.img,
+          desconto: prod.desconto
+        };
+        
         card.innerHTML = `
           <div class="product-img"><img src="${prod.img}" alt="${prod.nome}" loading="lazy" onerror="this.src='https://picsum.photos/id/20/200/200'"></div>
           <div class="product-info">
@@ -1324,20 +1244,25 @@
               <span class="discount-price">R$ ${prod.final.toFixed(2)}</span>
             </div>
             <div class="free-ship">🚚 FRETE GRÁTIS</div>
-            <button class="btn-view" data-produto='${JSON.stringify(prod)}'>👁️ VER PRODUTO</button>
+            <button class="btn-view">👁️ VER PRODUTO</button>
           </div>
         `;
+        
         const btn = card.querySelector('.btn-view');
+        // Armazenar os dados do produto diretamente no botão
+        btn.produtoData = produtoData;
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const produtoData = JSON.parse(btn.getAttribute('data-produto'));
-          abrirDetalhes(produtoData);
+          console.log("Botão clicado para:", btn.produtoData.nome);
+          abrirDetalhes(btn.produtoData);
         });
+        
         grid.appendChild(card);
       }
       section.appendChild(grid);
       container.appendChild(section);
     }
+    
     const banner = document.getElementById('promoBanner');
     if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
