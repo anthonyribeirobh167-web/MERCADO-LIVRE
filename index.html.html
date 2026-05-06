@@ -5,28 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Mega Oferta | 80% OFF + Frete Grátis</title>
   
-  <!-- TikTok Pixel Code Start - NOVO ID INTEGRADO -->
+  <!-- TikTok Pixel Code Start - ID: D7TEIHJC77U2TFGF5MH0 -->
   <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
       var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
       ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
       
-      // NOVO ID DO TIKTOK PIXEL
+      // CARREGAMENTO DO PIXEL COM O ID CORRETO
       ttq.load('D7TEIHJC77U2TFGF5MH0');
       ttq.page();
-
-      // Evento de Visualização para e-commerce
+      
+      // ==============================================
+      // EVENTO 1: ViewContent - Disparado quando a página carrega
+      // ==============================================
       ttq.track('ViewContent', {
-        contents: [
-          {
-            content_type: 'product_group',
-            content_id: 'mega_oferta_80_off' 
-          }
-        ],
-        content_type: 'product_group'
+        content_id: 'D7TEIHJC77U2TFGF5MH0',
+        content_type: 'product',
+        value: 97.00,
+        currency: 'BRL'
       });
-      console.log('✅ TikTok Pixel - ViewContent disparado com ID: D7TEIHJC77U2TFGF5MH0');
+      
+      console.log('✅ TikTok Pixel - Evento ViewContent disparado com sucesso!');
+      console.log('   content_id: D7TEIHJC77U2TFGF5MH0, value: R$ 97.00');
       
     }(window, document, 'ttq');
   </script>
@@ -43,20 +44,17 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // INICIALIZAÇÃO DO SEU PIXEL - Substitua pelo número do seu Pixel do Facebook
     fbq('init', 'SEU_ID_DO_PIXEL_AQUI');
     fbq('track', 'PageView');
-
-    function dispararTesteMeta() {
-      fbq('track', 'ViewContent', {
-        content_name: 'Pagina de Ofertas 80% OFF'
-      }, {
-        test_event_code: 'TES143470'
-      });
-      console.log("✅ Meta Pixel - Evento de teste enviado!");
-    }
-
-    window.addEventListener('load', dispararTesteMeta);
+    
+    fbq('track', 'ViewContent', {
+      content_name: 'Mega Ofertas 80% OFF',
+      content_type: 'product',
+      value: 97.00,
+      currency: 'BRL'
+    });
+    
+    console.log("✅ Meta Pixel - ViewContent disparado!");
   </script>
   <!-- End Meta Pixel Code -->
   
@@ -282,7 +280,21 @@
       display: inline-flex;
       margin: 8px 0;
     }
-    .btn-buy { background: #3483fa; color: white; border: none; padding: 10px 12px; border-radius: 44px; font-weight: 700; margin-top: 12px; cursor: pointer; transition: 0.2s; font-size: 0.85rem; width: 100%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .btn-buy { 
+      background: #3483fa; 
+      color: white; 
+      border: none; 
+      padding: 10px 12px; 
+      border-radius: 44px; 
+      font-weight: 700; 
+      margin-top: 12px; 
+      cursor: pointer; 
+      transition: 0.2s; 
+      font-size: 0.85rem; 
+      width: 100%; 
+      text-align: center; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
     .btn-buy:hover { background: #2968c8; transform: scale(0.98); }
     footer { background: #fff; border-top: 1px solid #e6e6e6; padding: 20px; text-align: center; font-size: 12px; color: #777; margin-top: 20px; }
     @media (max-width: 480px) {
@@ -384,7 +396,6 @@
   let girando = false;
   let animFrame = null;
   
-  // Segmentos da roleta com 80% OFF como prêmio principal
   const segmentos = [
     { label: "10% OFF", cor: "#ff6b6b", desconto: "10%" },
     { label: "20% OFF", cor: "#4d96ff", desconto: "20%" },
@@ -470,8 +481,6 @@
         btnGirar.disabled = true;
         btnGirar.style.display = 'none';
         btnLiberarOferta.style.display = 'block';
-        
-        // Disparar evento personalizado de conclusão da roleta
         console.log('🎡 Roleta concluída - 80% OFF garantido!');
         cancelAnimationFrame(animFrame);
       }
@@ -575,28 +584,28 @@
           </div>
         `;
         const btn = card.querySelector('.btn-buy');
+        
+        // ==============================================
+        // EVENTO 2: AddToCart - Disparado quando clica no botão de compra
+        // ==============================================
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           
-          // Disparar evento AddToCart para TikTok Pixel
+          // DISPARA O EVENTO ADDTOCART PARA O TIKTOK PIXEL
           if (typeof ttq !== 'undefined') {
             ttq.track('AddToCart', {
-              contents: [
-                { 
-                  content_id: prod.nome.replace(/\s+/g, '_').toLowerCase(), 
-                  content_name: prod.nome, 
-                  content_type: 'product', 
-                  quantity: 1, 
-                  price: prod.final 
-                }
-              ],
+              content_id: 'D7TEIHJC77U2TFGF5MH0',
+              content_type: 'product',
               value: prod.final,
               currency: 'BRL'
             });
-            console.log('🛒 TikTok Pixel - AddToCart disparado para:', prod.nome, 'Valor: R$', prod.final);
+            console.log('🛒 TikTok Pixel - Evento AddToCart disparado!');
+            console.log('   content_id: D7TEIHJC77U2TFGF5MH0, value: R$ ' + prod.final);
+          } else {
+            console.warn('⚠️ TikTok Pixel não encontrado!');
           }
           
-          // Disparar evento AddToCart para Meta Pixel (Facebook)
+          // DISPARA O EVENTO ADDTOCART PARA O META PIXEL (FACEBOOK)
           if (typeof fbq !== 'undefined') {
             fbq('track', 'AddToCart', { 
               value: prod.final, 
@@ -607,6 +616,7 @@
             console.log('💰 Meta Pixel - AddToCart disparado para:', prod.nome);
           }
           
+          // ABRE O LINK DO PRODUTO
           const url = btn.getAttribute('data-url');
           if(url && url !== "#") {
             window.open(url, '_blank');
@@ -614,6 +624,7 @@
             alert("Link promocional disponível em breve!");
           }
         });
+        
         grid.appendChild(card);
       }
       section.appendChild(grid);
