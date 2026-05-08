@@ -52,97 +52,6 @@
       overflow-x: hidden;
     }
 
-    .overlay-roleta {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(12px);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.3s, opacity 0.3s;
-    }
-    .overlay-roleta.ativo {
-      visibility: visible;
-      opacity: 1;
-    }
-    .roleta-container {
-      background: linear-gradient(145deg, #1e2a3a, #0a0f18);
-      border-radius: 60px;
-      padding: 24px 20px 36px;
-      text-align: center;
-      box-shadow: 0 30px 50px rgba(0,0,0,0.6), 0 0 0 6px #FFD966, 0 0 0 12px #ffaa33;
-      width: 92%;
-      max-width: 420px;
-      animation: glowPulse 1.8s infinite alternate;
-    }
-    @keyframes glowPulse {
-      0% { box-shadow: 0 30px 50px rgba(0,0,0,0.6), 0 0 0 6px #FFD966, 0 0 0 12px #ffaa33; }
-      100% { box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 10px #FFE484, 0 0 0 18px #ffcc55; }
-    }
-    .roleta-titulo { 
-      color: #FFE484; 
-      font-size: 28px; 
-      font-weight: 900; 
-      margin-bottom: 8px;
-      text-shadow: 0 2px 5px #00000030;
-      letter-spacing: 1px;
-    }
-    .roleta-sub {
-      color: #ffdd99;
-      font-size: 15px;
-      margin-bottom: 20px;
-      background: rgba(0,0,0,0.5);
-      display: inline-block;
-      padding: 5px 15px;
-      border-radius: 40px;
-    }
-    canvas { 
-      background: #2c3e2f; 
-      border-radius: 50%; 
-      margin-bottom: 20px; 
-      width: 260px; 
-      height: 260px; 
-      display: block; 
-      margin: 0 auto 20px; 
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 0 5px #ffdd77;
-    }
-    .btn-girar, .btn-liberar-oferta {
-      background: linear-gradient(135deg, #ffb347, #ff8c00);
-      border: none; 
-      padding: 16px 24px; 
-      font-size: 22px; 
-      font-weight: bold;
-      color: white; 
-      border-radius: 60px; 
-      cursor: pointer; 
-      box-shadow: 0 7px 0 #b45f00;
-      width: 90%; 
-      margin-top: 15px; 
-      transition: 0.07s linear;
-      letter-spacing: 1px;
-    }
-    .btn-girar:active, .btn-liberar-oferta:active { transform: translateY(4px); box-shadow: 0 3px 0 #b45f00; }
-    .btn-girar:disabled, .btn-liberar-oferta:disabled { opacity: 0.7; transform: none; cursor: default; background: #888; box-shadow: 0 5px 0 #555; }
-    
-    .btn-liberar-oferta {
-      background: linear-gradient(135deg, #00c853, #00a140);
-      box-shadow: 0 7px 0 #007a30;
-      animation: pulseBtn 1.5s infinite;
-      display: none;
-    }
-    @keyframes pulseBtn {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
-    
     .nav-header {
       background: #ffe600; 
       padding: 8px 12px; 
@@ -223,7 +132,6 @@
       text-align: center; 
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       animation: fadeSlide 0.5s ease-out;
-      display: none;
     }
     @keyframes fadeSlide {
       from { opacity: 0; transform: translateY(-12px); }
@@ -518,33 +426,6 @@
       color: #666;
     }
     
-    .image-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .image-modal.ativo {
-      visibility: visible;
-      opacity: 1;
-    }
-    .image-modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-    
     .pixel-debug {
       position: fixed;
       bottom: 10px;
@@ -568,8 +449,6 @@
       .discount-price { font-size: 1.2rem; }
       .category-title { font-size: 1.3rem; }
       .promo-banner h1 { font-size: 1.3rem; }
-      .roleta-container { max-width: 95%; padding: 16px; }
-      canvas { width: 210px; height: 210px; }
       .nav-search { max-width: 200px; }
       .comment-avatar { width: 36px; height: 36px; font-size: 14px; }
       .pixel-debug { font-size: 8px; bottom: 5px; right: 5px; }
@@ -599,7 +478,7 @@
 <main>
   <div class="container" id="mainContent">
     <div class="promo-banner" id="promoBanner">
-      <div class="badge-desconto">⚡ EXCLUSIVO APÓS LIBERAR OFERTA ⚡</div>
+      <div class="badge-desconto">⚡ OFERTA EXCLUSIVA ⚡</div>
       <h1>🔥 80% OFF + FRETE GRÁTIS 🔥</h1>
       <p>🚚 FRETE GRÁTIS PARA TODO BRASIL | PREÇOS IMPERDÍVEIS</p>
     </div>
@@ -609,16 +488,6 @@
 
 <div id="productDetailOverlay" class="product-detail-overlay">
   <div class="detail-container" id="detailContainer"></div>
-</div>
-
-<div id="roletaOverlay" class="overlay-roleta">
-  <div class="roleta-container">
-    <div class="roleta-titulo">🎁 GIRE & GANHE 🎁</div>
-    <div class="roleta-sub">⚠️ ATÉ 80% OFF + FRETE GRÁTIS ⚠️</div>
-    <canvas id="roletaCanvas" width="400" height="400" style="width:260px; height:260px;"></canvas>
-    <button id="btnGirar" class="btn-girar">🌀 GIRAR ROLETA AGORA 🌀</button>
-    <button id="btnLiberarOferta" class="btn-liberar-oferta">🎁 LIBERAR OFERTA AGORA 🎁</button>
-  </div>
 </div>
 
 <script>
@@ -662,7 +531,7 @@
     }
   }
   
-  function dispararAddToCart(produto, buttonElement = null) {
+  function dispararAddToCart(produto) {
     if (typeof ttq !== 'undefined') {
       ttq.track('AddToCart', {
         content_id: produto.nome,
@@ -682,16 +551,6 @@
         value: produto.final,
         currency: 'BRL'
       });
-    }
-    
-    if (buttonElement) {
-      const originalText = buttonElement.innerHTML;
-      buttonElement.innerHTML = '✅ PRODUTO ADICIONADO!';
-      buttonElement.style.transform = 'scale(0.98)';
-      setTimeout(() => {
-        buttonElement.innerHTML = originalText;
-        buttonElement.style.transform = '';
-      }, 1500);
     }
   }
   
@@ -762,158 +621,29 @@
   };
 
   // ==============================================
-  // COMENTÁRIOS PERSONALIZADOS PARA CADA PRODUTO
+  // COMENTÁRIOS PERSONALIZADOS
   // ==============================================
   
   const getComentariosPorProduto = (produtoNome) => {
-    // Comentários para Air Fryer 5L Digital
-    if (produtoNome === "Air Fryer 5L Digital") {
+    if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) {
       return [
-        { nome: "Mariana Costa", estrelas: 5, texto: "Comprei essa Air Fryer e não me arrependo! As batatas ficam crocantes e muito saudáveis. A entrega foi super rápida, em 3 dias já estava aqui. Recomendo demais!", data: "18/03/2025", verificado: true },
-        { nome: "Roberto Almeida", estrelas: 5, texto: "Produto excelente! O painel digital é muito fácil de usar e o timer funciona perfeitamente. Já fiz frango, batata e até bolo. Ficou tudo muito bom!", data: "15/03/2025", verificado: true },
-        { nome: "Carla Mendes", estrelas: 4, texto: "Muito boa, cabem 2kg de batata tranquilamente. O único ponto é que ela é um pouco barulhenta, mas pelo preço que paguei com 80% OFF, valeu muito!", data: "10/03/2025", verificado: true },
-        { nome: "Fernando Santos", estrelas: 5, texto: "Melhor investimento que fiz na cozinha! Minha esposa adorou. A comida fica sequinha e saborosa. O frete grátis foi um diferencial enorme.", data: "05/03/2025", verificado: true },
-        { nome: "Patrícia Lima", estrelas: 5, texto: "Chegou antes do prazo e em perfeito estado. Já testei várias receitas e todas ficaram ótimas. Aproveitem o desconto porque ele é real! Loja confiável.", data: "28/02/2025", verificado: true },
-        { nome: "Ricardo Oliveira", estrelas: 4, texto: "Produto bom, fácil de limpar. A bandeja antiaderente funciona bem. Só demorou um pouco mais na entrega por causa da transportadora, mas o vendedor foi super atencioso.", data: "22/02/2025", verificado: false },
-        { nome: "Amanda Souza", estrelas: 5, texto: "Simplesmente fantástica! Já recomendei para todas as minhas amigas. O desconto de 80% + frete grátis foi o melhor negócio que fiz esse ano!", data: "15/02/2025", verificado: true }
+        { nome: "Mariana Costa", estrelas: 5, texto: "Comprei e não me arrependo! As batatas ficam crocantes e saudáveis. Entrega super rápida!", data: "18/03/2025", verificado: true },
+        { nome: "Roberto Almeida", estrelas: 5, texto: "Produto excelente! O painel digital é fácil de usar. Já fiz de tudo e ficou perfeito!", data: "15/03/2025", verificado: true },
+        { nome: "Carla Mendes", estrelas: 4, texto: "Muito boa, cabem 2kg de batata tranquilamente. Valeu o preço que paguei com 80% OFF!", data: "10/03/2025", verificado: true },
+        { nome: "Fernando Santos", estrelas: 5, texto: "Melhor investimento na cozinha! Minha esposa adorou. Frete grátis foi um diferencial.", data: "05/03/2025", verificado: true }
       ];
     }
     
-    // Comentários para Fritadeira Sem Óleo 6L
-    if (produtoNome === "Fritadeira Sem Óleo 6L") {
-      return [
-        { nome: "Luciana Ferreira", estrelas: 5, texto: "Essa fritadeira de 6L é perfeita para minha família grande! Faço frango inteiro e batata para todo mundo. A qualidade é excelente.", data: "20/03/2025", verificado: true },
-        { nome: "Marcelo Rodrigues", estrelas: 5, texto: "Produto top! A capacidade de 6L faz toda diferença. Já fiz até pizza na air fryer e ficou sensacional. Recomendo!", data: "16/03/2025", verificado: true },
-        { nome: "Juliana Martins", estrelas: 4, texto: "Gostei muito, só achei que demora um pouco mais para aquecer do que outras que já tive. Mas o resultado final é muito bom.", data: "12/03/2025", verificado: true },
-        { nome: "Eduardo Lima", estrelas: 5, texto: "Fritadeira potente e espaçosa. O desconto de 80% foi surreal, paguei menos de R$ 100 em um produto que custa mais de R$ 500. Valeu cada centavo!", data: "07/03/2025", verificado: true },
-        { nome: "Vanessa Ribeiro", estrelas: 5, texto: "Entregaram antes do prazo, veio bem embalado. A fritadeira é linda e funciona perfeitamente. Minha família aprovou!", data: "01/03/2025", verificado: true },
-        { nome: "Thiago Nunes", estrelas: 4, texto: "Produto muito bom, só o manual que veio em inglês, mas é fácil de usar. O frete grátis foi um diferencial.", data: "25/02/2025", verificado: false },
-        { nome: "Beatriz Costa", estrelas: 5, texto: "Maravilhosa! Já fiz até bolo de caneca nela. A comida fica crocante e sem óleo. Super recomendo esta loja!", data: "18/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Air Fryer Oven 8L
-    if (produtoNome === "Air Fryer Oven 8L") {
-      return [
-        { nome: "Anderson Silva", estrelas: 5, texto: "Essa air fryer oven de 8L é um monstro! Cabe um frango inteiro e mais legumes. O formato de forno é muito prático.", data: "22/03/2025", verificado: true },
-        { nome: "Tatiana Oliveira", estrelas: 5, texto: "Comprei para substituir meu forno antigo e não me arrependi! Assa, frita e esquenta. Multifuncional e prática. Valeu cada real!", data: "17/03/2025", verificado: true },
-        { nome: "Felipe Andrade", estrelas: 4, texto: "Produto muito bom, mas ocupa bastante espaço na bancada. Porém a capacidade compensa. O desconto foi imperdível!", data: "13/03/2025", verificado: true },
-        { nome: "Camila Rocha", estrelas: 5, texto: "Simplesmente perfeita! Já fiz assado, frango, batata frita e até pão de queijo. Tudo fica com textura incrível.", data: "08/03/2025", verificado: true },
-        { nome: "Rafael Martins", estrelas: 5, texto: "Melhor compra do ano! A entrega foi rápida e o produto veio muito bem embalado. Loja super confiável, recomendo!", data: "02/03/2025", verificado: true },
-        { nome: "Cláudia Pereira", estrelas: 4, texto: "Gostei bastante, só o timer que poderia ser digital, mas é de boa. O preço com frete grátis ficou excelente.", data: "24/02/2025", verificado: false },
-        { nome: "Gustavo Henrique", estrelas: 5, texto: "Air fryer oven sensacional! O formato de forno permite fazer muitas receitas diferentes. Já virou item indispensável aqui em casa.", data: "17/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Mini Air Fryer 2L
-    if (produtoNome === "Mini Air Fryer 2L") {
-      return [
-        { nome: "Larissa Santos", estrelas: 5, texto: "Essa mini air fryer é perfeita para quem mora sozinho! Faço batata para 2 pessoas tranquilamente. Ocupa pouco espaço e é muito prática.", data: "21/03/2025", verificado: true },
-        { nome: "Bruno Lima", estrelas: 5, texto: "Comprei para o meu apê e foi a melhor decisão! É pequena mas potente. Já fiz frango, batata e até bolinho. Recomendo!", data: "14/03/2025", verificado: true },
-        { nome: "Isabela Freitas", estrelas: 4, texto: "Produto bom para porções menores. O design é bonito e a limpeza é fácil. Só gostaria que a bandeja fosse um pouco maior.", data: "09/03/2025", verificado: true },
-        { nome: "Diego Souza", estrelas: 5, texto: "Ótima para o dia a dia! Faço meu lanche da tarde em poucos minutos. O desconto de 80% foi um achado!", data: "04/03/2025", verificado: true },
-        { nome: "Fernanda Lima", estrelas: 5, texto: "Perfeita para estudantes! Já levei para o trabalho e todo mundo quis saber onde comprei. A entrega foi super rápida.", data: "26/02/2025", verificado: true },
-        { nome: "Leonardo Costa", estrelas: 4, texto: "Boa fritadeira, atende bem para duas pessoas. Só faz um pouco de barulho, mas nada demais. Vale o preço!", data: "19/02/2025", verificado: false },
-        { nome: "Priscila Martins", estrelas: 5, texto: "Amei! Já é a segunda que compro (a primeira foi para presentear minha mãe). Prática, eficiente e linda!", data: "11/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Fritadeira 4L Painel Touch
-    if (produtoNome === "Fritadeira 4L Painel Touch") {
-      return [
-        { nome: "Viviane Araújo", estrelas: 5, texto: "O painel touch é sensacional! Muito mais moderno que os modelos com botão. A fritadeira é linda e faz um barulho baixo.", data: "23/03/2025", verificado: true },
-        { nome: "Humberto Silva", estrelas: 5, texto: "Essa fritadeira é show! O painel digital é muito intuitivo. Já fiz de tudo e ela sempre entrega um resultado crocante.", data: "18/03/2025", verificado: true },
-        { nome: "Renata Alves", estrelas: 4, texto: "Produto bonito e funcional. Só senti falta de uma luz interna para ver a comida enquanto assa. Mas no geral é muito boa.", data: "11/03/2025", verificado: true },
-        { nome: "Sérgio Mota", estrelas: 5, texto: "Comprei pelo preço promocional e não me arrependi! O painel touch é um charme. Minha esposa adorou. Recomendo!", data: "06/03/2025", verificado: true },
-        { nome: "Aline Ferreira", estrelas: 5, texto: "Entrega rápida e produto de qualidade. O frete grátis foi essencial para fechar a compra. Com certeza comprarei novamente!", data: "28/02/2025", verificado: true },
-        { nome: "José Carlos", estrelas: 4, texto: "Produto muito bom, só demorou um pouco para acostumar com o painel touch. Mas depois que pega o jeito, é muito prático.", data: "21/02/2025", verificado: false },
-        { nome: "Marcia Regina", estrelas: 5, texto: "Maravilhosa! A fritadeira tem 4L ideal para minha família de 3 pessoas. O painel touch é lindo e fácil de limpar. Amei!", data: "14/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Capinhas
-    if (produtoNome.includes("Capinha")) {
-      return [
-        { nome: "Rafaela Martins", estrelas: 5, texto: "Produto excelente! A capinha encaixou perfeitamente no meu iPhone, material de qualidade e entrega rápida. Recomendo demais!", data: "15/03/2025", verificado: true },
-        { nome: "Thiago Oliveira", estrelas: 5, texto: "Melhor capinha que já comprei! O silicone é bem resistente e não acumula sujeira. O preço com 80% OFF ficou imperdível.", data: "10/03/2025", verificado: true },
-        { nome: "Camila Santos", estrelas: 4, texto: "Gostei muito, a cor é exatamente como na foto. Só demorou um pouco mais na entrega, mas valeu a pena.", data: "05/03/2025", verificado: true },
-        { nome: "Felipe Lima", estrelas: 5, texto: "Produto original e de ótima qualidade. Protege bem o celular contra quedas. Frete grátis é um diferencial enorme!", data: "28/02/2025", verificado: true },
-        { nome: "Juliana Costa", estrelas: 5, texto: "Comprei para presentear e amei! Chegou antes do prazo e a qualidade é fantástica. Super recomendo esta loja.", data: "20/02/2025", verificado: false },
-        { nome: "Marcelo Alves", estrelas: 4, texto: "Boa capinha, bem resistente. Atendeu minhas expectativas, entregaram o que prometeram.", data: "15/02/2025", verificado: true },
-        { nome: "Patrícia Souza", estrelas: 5, texto: "Amei! Já é a segunda vez que compro. O desconto de 80% é real e o frete grátis ajuda muito. Loja confiável!", data: "10/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Películas
-    if (produtoNome.includes("Película")) {
-      return [
-        { nome: "André Silva", estrelas: 5, texto: "Película de vidro de altíssima qualidade! Não descolou e a sensibilidade ao toque continua perfeita.", data: "12/03/2025", verificado: true },
-        { nome: "Fernanda Lima", estrelas: 5, texto: "Fácil de instalar, veio com moldes auxiliares. Recomendo a todos que querem proteger a tela.", data: "08/03/2025", verificado: true },
-        { nome: "Rodrigo Santos", estrelas: 4, texto: "Produto chegou bem embalado e dentro do prazo. Atendeu minhas expectativas, bom custo-benefício.", data: "01/03/2025", verificado: true },
-        { nome: "Amanda Pereira", estrelas: 5, texto: "Sensacional! A película de privacidade funciona muito bem. Superou minhas expectativas!", data: "25/02/2025", verificado: true },
-        { nome: "Carlos Eduardo", estrelas: 5, texto: "Melhor preço que encontrei. Capricharam na embalagem e o produto é original. Valeu cada centavo.", data: "18/02/2025", verificado: false },
-        { nome: "Bruna Lima", estrelas: 4, texto: "Muito boa! Só tive um pouco de dificuldade na instalação, mas depois ficou perfeita.", data: "12/02/2025", verificado: true },
-        { nome: "Leonardo Alves", estrelas: 5, texto: "Produto incrível, protege bem e não atrapalha o uso da tela. Recomendo fortemente!", data: "05/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Carregadores
-    if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base") || produtoNome.includes("Power")) {
-      return [
-        { nome: "Priscila Martins", estrelas: 5, texto: "Carregador rápido de verdade! Meu iPhone carrega em menos de 1 hora. Produto de qualidade.", data: "13/03/2025", verificado: true },
-        { nome: "Bruno Almeida", estrelas: 5, texto: "Ótimo produto, construção robusta e não esquenta. Recomendo a todos!", data: "07/03/2025", verificado: true },
-        { nome: "Cristina Lima", estrelas: 4, texto: "Funciona muito bem, só gostaria do cabo um pouco mais longo. Mas atendeu perfeitamente.", data: "28/02/2025", verificado: true },
-        { nome: "Daniel Santos", estrelas: 5, texto: "Carregador original e de qualidade. Garantia de segurança e carregamento eficiente.", data: "22/03/2025", verificado: true },
-        { nome: "Michele Rocha", estrelas: 5, texto: "Muito bom! Já tinha comprado outro similar e este superou. Entrega rápida e frete grátis.", data: "16/02/2025", verificado: false },
-        { nome: "Sérgio Teixeira", estrelas: 4, texto: "Produto atendeu minhas necessidades. Carrega bem rápido, sem superaquecer.", data: "11/02/2025", verificado: true },
-        { nome: "Vanessa Moraes", estrelas: 5, texto: "Perfeito! Carrega todos meus dispositivos. Recomendo esta loja, muito confiável.", data: "03/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Fones/Áudio
-    if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Headphone") || produtoNome.includes("Earbuds") || produtoNome.includes("Speaker") || produtoNome.includes("JBL") || produtoNome.includes("Caixa") || produtoNome.includes("Soundbar")) {
-      return [
-        { nome: "Gabriel Henrique", estrelas: 5, texto: "Fone Bluetooth com som maravilhoso! Bateria dura muito e o cancelamento de ruído funciona bem.", data: "14/03/2025", verificado: true },
-        { nome: "Larissa Pires", estrelas: 5, texto: "Melhor compra que fiz esse ano! O fone é confortável e o som é de altíssima qualidade.", data: "09/03/2025", verificado: true },
-        { nome: "Vinícius Ribeiro", estrelas: 4, texto: "Produto bom, conectividade estável. Só achei o touch um pouco sensível, mas acostumei.", data: "03/03/2025", verificado: true },
-        { nome: "Isabela Castro", estrelas: 5, texto: "Amei! O grave é potente e os agudos são nítidos. Valeu muito a pena com o desconto!", data: "27/02/2025", verificado: true },
-        { nome: "Rafael Nunes", estrelas: 5, texto: "Entregaram antes do prazo. Produto lacrado e funcionando perfeitamente. Recomendo!", data: "19/02/2025", verificado: false },
-        { nome: "Tatiane Souza", estrelas: 4, texto: "Bom fone, bateria de longa duração. O estojo de carregamento é bem compacto.", data: "14/02/2025", verificado: true },
-        { nome: "Eduardo Gomes", estrelas: 5, texto: "Fantástico! A qualidade do som me surpreendeu. Parece fone de marca muito mais cara.", data: "07/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários para Liquidificadores
-    if (produtoNome.includes("Liquidificador")) {
-      return [
-        { nome: "Mariana Brito", estrelas: 5, texto: "Liquidificador potente e super silencioso! Já fiz várias receitas e ele dá conta de tudo.", data: "17/03/2025", verificado: true },
-        { nome: "José Roberto", estrelas: 5, texto: "Produto de qualidade, lâminas muito afiadas. Vale muito o preço que paguei com desconto.", data: "10/03/2025", verificado: true },
-        { nome: "Cláudia Freitas", estrelas: 4, texto: "Funciona bem e é bonito. Só a jarra que acho um pouco frágil, mas no geral é bom.", data: "06/03/2025", verificado: true },
-        { nome: "Luciano Menezes", estrelas: 5, texto: "Excelente! Liquidificador muito robusto, já usei várias vezes e continua como novo.", data: "28/02/2025", verificado: true },
-        { nome: "Renata Nogueira", estrelas: 5, texto: "Amei! É super prático e fácil de limpar. Recomendo a todos que buscam qualidade.", data: "21/02/2025", verificado: false },
-        { nome: "Fábio Gomes", estrelas: 4, texto: "Bom produto, atende bem. Só senti falta de mais potência, mas pro dia a dia é suficiente.", data: "15/02/2025", verificado: true },
-        { nome: "Lívia Mendes", estrelas: 5, texto: "Maravilhoso! Liquidificador 3 em 1 resolveu todos meus problemas na cozinha.", data: "08/02/2025", verificado: true }
-      ];
-    }
-    
-    // Comentários padrão (fallback)
     return [
-      { nome: "Cliente Satisfeito", estrelas: 5, texto: "Produto excelente! Recomendo a todos. Entrega rápida e produto de qualidade.", data: "15/03/2025", verificado: true },
-      { nome: "Comprador Verificado", estrelas: 5, texto: "Muito bom! Valeu cada centavo. O desconto de 80% foi incrível.", data: "10/03/2025", verificado: true },
-      { nome: "Usuário Aprovou", estrelas: 4, texto: "Produto atendeu minhas expectativas. Entrega dentro do prazo.", data: "05/03/2025", verificado: true },
-      { nome: "Recomendo", estrelas: 5, texto: "Produto de qualidade, chegou bem embalado. Super recomendo!", data: "28/02/2025", verificado: true },
-      { nome: "Cliente Feliz", estrelas: 5, texto: "Amei o produto! Já estou pensando em comprar outro para presentear.", data: "20/02/2025", verificado: false },
-      { nome: "Ótima Compra", estrelas: 4, texto: "Produto bom, entrega rápida. Satisfeito com a compra.", data: "15/02/2025", verificado: true },
-      { nome: "Top Demais", estrelas: 5, texto: "Melhor compra que fiz esse ano! Produto de primeira linha.", data: "10/02/2025", verificado: true }
+      { nome: "Cliente Satisfeito", estrelas: 5, texto: "Produto excelente! Recomendo a todos.", data: "15/03/2025", verificado: true },
+      { nome: "Comprador Verificado", estrelas: 5, texto: "Muito bom! Valeu cada centavo.", data: "10/03/2025", verificado: true },
+      { nome: "Usuário Aprovou", estrelas: 4, texto: "Produto atendeu minhas expectativas.", data: "05/03/2025", verificado: true }
     ];
   };
 
   const getComentariosComImagens = (produtoNome, seed) => {
     const comentarios = getComentariosPorProduto(produtoNome);
-    // Retorna apenas os comentários, sem imagens
-    return comentarios.map((com) => {
-      return { ...com, imagens: [] };
-    });
+    return comentarios.map((com) => ({ ...com, imagens: [] }));
   };
 
   const calcularMedia = (comentarios) => {
@@ -929,219 +659,24 @@
     if (produtoNome.includes("Air Fryer") || produtoNome.includes("Fritadeira")) {
       return `🍟 FRITURA SAUDÁVEL E PRÁTICA! 🍗
       
-🔥 TECNOLOGIA AIR CIRCULATION: Fritura com 99% menos óleo, mantendo o sabor e a crocância dos alimentos. Sua saúde agradece!
+🔥 TECNOLOGIA AIR CIRCULATION: Fritura com 99% menos óleo, mantendo o sabor e a crocância.
 
-🎛️ PAINEL DIGITAL TOUCH: Programas pré-definidos (batata frita, frango, bolo, peixe, legumes). Só selecionar e esperar!
+🎛️ PAINEL DIGITAL: Programas pré-definidos (batata frita, frango, bolo, peixe).
 
-⏱️ TIMER DE 60 MINUTOS: Desligamento automático com alarme. Não precisa ficar vigiando.
-
-🍽️ CAPACIDADE PERFEITA: Espaço suficiente para preparar refeições para toda família ou para quem mora sozinho.
-
-🧼 FÁCIL LIMPEZA: Cesto antiaderente removível e lavável. Vai direto na água.
-
-⚡ PREÇO DE LANÇAMENTO: De R$ 449,90 por apenas R$ ${precoFinal.toFixed(2)} com FRETE GRÁTIS! Economia de mais de R$ 350 reais!`;
-    }
-    
-    if (produtoNome.includes("Capinha")) {
-      return `✨ PROTEÇÃO TOTAL PARA SEU IPHONE! ✨
-      
-📱 PROTEÇÃO 360 GRAUS: Capinha com bordas reforçadas que protege contra quedas e impactos do dia a dia.
-
-💎 MATERIAL PREMIUM: Silicone líquido de alta qualidade que não amarela com o tempo e tem toque aveludado.
-
-🎯 ENCAIXE PERFEITO: Moldes precisos que permitem acesso fácil a todas as portas e botões.
-
-💰 OFERTA IMPERDÍVEL: De R$ 199,90 por apenas R$ ${precoFinal.toFixed(2)} com FRETE GRÁTIS!`;
-    }
-    
-    if (produtoNome.includes("Película")) {
-      return `✨ PROTEÇÃO QUE VOCÊ MERECE! ✨
-      
-🛡️ RESISTÊNCIA 9H: Nossa película de vidro temperado tem dureza de safira, protegendo sua tela contra arranhões e quedas.
-
-👆 SENSIBILIDADE TOTAL: Com apenas 0.33mm de espessura, você nem sente que tem uma película instalada.
-
-🔍 ALTA TRANSPARÊNCIA: 99% de clareza ótica, mantendo as cores vivas e a nitidez da sua tela.
-
-🎁 BÔNUS EXCLUSIVO: Kit com guia de instalação, lenço umedecido e pano de microfibra incluso!`;
-    }
-    
-    if (produtoNome.includes("Carregador") || produtoNome.includes("Cabo") || produtoNome.includes("Base")) {
-      return `⚡ CARREGAMENTO SUPERVELOZ! ⚡
-      
-🔋 TECNOLOGIA POWER DELIVERY: Carregue seu dispositivo de 0% a 50% em apenas 30 minutos. Adeus à ansiedade da bateria acabando!
-
-🛡️ SEGURANÇA CERTIFICADA: Proteção contra sobrecarga, curto-circuito e superaquecimento.
-
-🌍 COMPATIBILIDADE UNIVERSAL: Funciona com iPhone, Samsung, Xiaomi, Motorola e todos dispositivos USB-C.
-
-💪 CONSTRUÇÃO ROBUSTA: Cabo trançado que não embola nem destrói com o tempo.`;
-    }
-    
-    if (produtoNome.includes("Fone") || produtoNome.includes("AirPods") || produtoNome.includes("Headphone") || produtoNome.includes("Speaker") || produtoNome.includes("JBL")) {
-      return `🎧 EXPERIÊNCIA SONORA INCRÍVEL! 🎧
-      
-🔊 SOM CRISTALINO: Grave profundo, médio equilibrado e agudo nítido. Você vai ouvir detalhes que nunca percebeu nas suas músicas.
-
-⚡ CONEXÃO BLUETOOTH 5.3: Pareamento instantâneo e estável em até 10 metros. Sem fios, sem estresse!
-
-🔋 BATERIA DE LONGA DURAÇÃO: Até 6 horas de reprodução contínua + estojo carregador com mais 4 cargas!
-
-🎤 CHAMADAS NITIDAS: Microfone com cancelamento de ruído para você fazer ligações sem se preocupar.`;
-    }
-    
-    if (produtoNome.includes("Liquidificador")) {
-      return `🥤 POTÊNCIA QUE FAZ A DIFERENÇA! 🥭
-      
-💪 MOTOR 700W DE POTÊNCIA: Tritura até os alimentos mais duros como gelo, sementes e fibras em segundos.
-
-🔪 LÂMINAS EM AÇO INOX: Lâminas de dupla ação com tecnologia 4D que corta de cima para baixo e de baixo para cima.
-
-📏 JARRA COM CAPACIDADE DE 2 LITROS: Serve até 8 copos de vitamina de uma só vez.
-
-🔄 FUNÇÃO AUTO-LIMPEZA: Adicione água e sabão, ligue por 30 segundos e pronto! Nunca foi tão fácil limpar.`;
+⚡ PREÇO DE LANÇAMENTO: De R$ 449,90 por apenas R$ ${precoFinal.toFixed(2)} com FRETE GRÁTIS!`;
     }
     
     return `✨ PRODUTO DE QUALIDADE! ✨
     
 ✅ Material Premium com alta durabilidade
 ✅ Tecnologia de última geração
-✅ Compatível com diversos dispositivos
 ✅ Garantia de 12 meses
-✅ Entrega rápida para todo Brasil
 
 💰 APENAS R$ ${precoFinal.toFixed(2)} (80% OFF + FRETE GRÁTIS)!`;
   };
 
   // ==============================================
-  // ROLETA
-  // ==============================================
-  
-  let jaGirou = false;
-  let giroConcluido = false;
-  
-  const canvas = document.getElementById('roletaCanvas');
-  const ctx = canvas.getContext('2d');
-  const overlay = document.getElementById('roletaOverlay');
-  const btnGirar = document.getElementById('btnGirar');
-  const btnLiberarOferta = document.getElementById('btnLiberarOferta');
-  let anguloAtual = 0;
-  let girando = false;
-  let animFrame = null;
-  
-  const segmentos = [
-    { label: "10% OFF", cor: "#ff6b6b", desconto: "10%" },
-    { label: "20% OFF", cor: "#4d96ff", desconto: "20%" },
-    { label: "50% OFF", cor: "#ffb347", desconto: "50%" },
-    { label: "80% OFF", cor: "#20c997", desconto: "80%" },
-    { label: "FRETE GRÁTIS", cor: "#f7b731", especial: true, desconto: "Frete Grátis" },
-    { label: "60% OFF", cor: "#a55dca", desconto: "60%" },
-    { label: "DESCONTO VIP", cor: "#5f9ea0", desconto: "Extra!" }
-  ];
-  const PREMIO_INDEX = 3;
-  const anguloPorSeg = (Math.PI * 2) / segmentos.length;
-  
-  function desenharRoleta() {
-    const centroX = canvas.width/2, centroY = canvas.height/2, raio = canvas.width * 0.42;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    for (let i=0; i<segmentos.length; i++) {
-      let inicio = i * anguloPorSeg + anguloAtual;
-      let fim = inicio + anguloPorSeg;
-      ctx.beginPath();
-      ctx.moveTo(centroX,centroY);
-      ctx.arc(centroX,centroY,raio,inicio,fim);
-      ctx.fillStyle = segmentos[i].cor;
-      ctx.fill();
-      ctx.save();
-      ctx.translate(centroX,centroY);
-      ctx.rotate(inicio + anguloPorSeg/2);
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 12px 'Segoe UI', system-ui";
-      ctx.shadowBlur = 0;
-      let txt = segmentos[i].label;
-      if(txt.length > 12) txt = txt.slice(0,10)+"..";
-      ctx.fillText(txt, raio*0.62, 6);
-      if(segmentos[i].desconto && segmentos[i].desconto !== "Frete Grátis") {
-        ctx.font = "bold 9px 'Segoe UI'";
-        ctx.fillStyle = "#fff8e0";
-        ctx.fillText(segmentos[i].desconto, raio*0.62, 22);
-      }
-      ctx.restore();
-    }
-    ctx.beginPath();
-    ctx.moveTo(centroX-12, centroY-raio-8);
-    ctx.lineTo(centroX, centroY-raio+6);
-    ctx.lineTo(centroX+12, centroY-raio-8);
-    ctx.fillStyle = "#ffea80";
-    ctx.shadowBlur = 6;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(centroX-6, centroY-raio-12);
-    ctx.lineTo(centroX, centroY-raio-2);
-    ctx.lineTo(centroX+6, centroY-raio-12);
-    ctx.fillStyle = "#ffb347";
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
-  
-  function girarRoleta() {
-    if(girando || jaGirou) return;
-    jaGirou = true;
-    girando = true;
-    const anguloAlvoSegmento = PREMIO_INDEX;
-    const anguloSeta = -Math.PI/2;
-    const anguloCentral = anguloAlvoSegmento * anguloPorSeg + (anguloPorSeg/2);
-    let anguloFinalBase = anguloSeta - anguloCentral;
-    anguloFinalBase = ((anguloFinalBase % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI);
-    const voltas = 10;
-    let anguloInicial = anguloAtual;
-    let anguloFinal = anguloFinalBase + (voltas * 2 * Math.PI);
-    const duracao = 2100;
-    const inicio = performance.now();
-    function step(now) {
-      let elapsed = now - inicio;
-      let t = Math.min(1, elapsed/duracao);
-      let ease = 1 - Math.pow(1-t, 3);
-      let novoAngulo = anguloInicial + (anguloFinal - anguloInicial) * ease;
-      anguloAtual = novoAngulo % (2*Math.PI);
-      desenharRoleta();
-      if(t<1) animFrame = requestAnimationFrame(step);
-      else {
-        girando = false;
-        anguloAtual = anguloFinalBase % (2*Math.PI);
-        desenharRoleta();
-        giroConcluido = true;
-        btnGirar.disabled = true;
-        btnGirar.style.display = 'none';
-        btnLiberarOferta.style.display = 'block';
-        console.log('🎡 Roleta concluída - 80% OFF garantido!');
-        cancelAnimationFrame(animFrame);
-      }
-    }
-    animFrame = requestAnimationFrame(step);
-  }
-  
-  function exibirRoleta() {
-    overlay.classList.add('ativo');
-    document.body.classList.add('roleta-ativa');
-    anguloAtual = Math.random() * 2 * Math.PI;
-    desenharRoleta();
-    jaGirou = false; 
-    giroConcluido = false;
-    btnGirar.disabled = false;
-    btnGirar.style.display = 'block';
-    btnLiberarOferta.style.display = 'none';
-  }
-  
-  function liberarCatalogo() {
-    overlay.classList.remove('ativo');
-    document.body.classList.remove('roleta-ativa');
-    document.getElementById('promoBanner').style.display = 'block';
-    renderizarCatalogo();
-  }
-  
-  // ==============================================
-  // CATÁLOGO COMPLETO COM TODOS OS PRODUTOS
+  // CATÁLOGO COMPLETO
   // ==============================================
   
   const catalogoData = [
@@ -1196,8 +731,6 @@
   }
   
   function abrirDetalhes(produto) {
-    console.log("Abrindo detalhes do produto:", produto);
-    
     const linkReal = linksProdutos[produto.nome] || "#";
     const detailOverlay = document.getElementById('productDetailOverlay');
     const detailContainer = document.getElementById('detailContainer');
@@ -1212,69 +745,8 @@
     let descricoesProduto = [
       "✅ Material Premium com alta durabilidade",
       "✅ Tecnologia de última geração",
-      "✅ Compatível com diversos dispositivos",
-      "✅ Garantia de 12 meses",
-      "✅ Entrega rápida para todo Brasil",
       "✅ 80% OFF + Frete Grátis"
     ];
-    
-    if (produto.nome.includes("Air Fryer") || produto.nome.includes("Fritadeira")) {
-      descricoesProduto = [
-        "✅ Fritadeira sem óleo e saudável",
-        "✅ Painel digital touch screen",
-        "✅ Timer automático com desligamento",
-        "✅ Capacidade ideal para sua família",
-        "✅ Fácil limpeza com bandeja removível",
-        "✅ Economia de energia comparada ao forno tradicional",
-        "✅ Design moderno e compacto com 80% OFF"
-      ];
-    } else if (produto.nome.includes("Capinha")) {
-      descricoesProduto = [
-        "✅ Proteção 360 graus contra quedas",
-        "✅ Material Silicone/Antialérgico e resistente",
-        "✅ Acesso fácil a todas as portas e botões",
-        "✅ Design elegante e moderno",
-        "✅ Encaixe perfeito no dispositivo",
-        "✅ 80% OFF + Frete Grátis incluso"
-      ];
-    } else if (produto.nome.includes("Película")) {
-      descricoesProduto = [
-        "✅ Proteção contra arranhões e impactos",
-        "✅ Tecnologia 9H de dureza",
-        "✅ Alta transparência e sensibilidade",
-        "✅ Fácil instalação sem bolhas",
-        "✅ Borda arredondada 2.5D",
-        "✅ Kit com guia de instalação incluso",
-        "✅ 80% OFF + Frete Grátis"
-      ];
-    } else if (produto.nome.includes("Carregador") || produto.nome.includes("Cabo") || produto.nome.includes("Base") || produto.nome.includes("Power")) {
-      descricoesProduto = [
-        "✅ Carregamento rápido e seguro",
-        "✅ Proteção contra superaquecimento",
-        "✅ Compatível com diversos dispositivos",
-        "✅ Certificação de segurança",
-        "✅ Cabo resistente incluso",
-        "✅ 80% OFF + Frete Grátis"
-      ];
-    } else if (produto.nome.includes("Fone") || produto.nome.includes("AirPods") || produto.nome.includes("Headphone") || produto.nome.includes("Earbuds")) {
-      descricoesProduto = [
-        "✅ Som de alta qualidade com graves potentes",
-        "✅ Conexão Bluetooth estável",
-        "✅ Bateria de longa duração",
-        "✅ Conforto ergonômico",
-        "✅ Microfone com cancelamento de ruído",
-        "✅ 80% OFF + Frete Grátis"
-      ];
-    } else if (produto.nome.includes("Liquidificador")) {
-      descricoesProduto = [
-        "✅ Potência de 700W a 900W",
-        "✅ Lâminas em aço inoxidável",
-        "✅ Multifuncional para diversas receitas",
-        "✅ Fácil limpeza",
-        "✅ Design compacto e moderno",
-        "✅ 80% OFF + Frete Grátis"
-      ];
-    }
     
     const comentariosHTML = comentarios.map((com, idx) => {
       return `
@@ -1364,7 +836,7 @@
         original: produto.original
       };
       
-      dispararAddToCart(produtoData, btnComprar);
+      dispararAddToCart(produtoData);
       dispararInitiateCheckout(produtoData);
       
       const url = btnComprar.getAttribute('data-url');
@@ -1425,7 +897,6 @@
         btn.produtoData = produtoData;
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          console.log("Botão clicado para:", btn.produtoData.nome);
           abrirDetalhes(btn.produtoData);
         });
         
@@ -1434,9 +905,6 @@
       section.appendChild(grid);
       container.appendChild(section);
     }
-    
-    const banner = document.getElementById('promoBanner');
-    if(banner) banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   
   const searchInput = document.querySelector('.nav-search-input');
@@ -1461,27 +929,11 @@
   });
   
   window.addEventListener('DOMContentLoaded', () => {
-    exibirRoleta();
-    
-    btnGirar.addEventListener('click', () => { 
-      if(!girando && !jaGirou) {
-        girarRoleta();
-      } else if(jaGirou) {
-        alert("🎉 Você já girou! Clique em 'LIBERAR OFERTA' para ver os produtos com 80% OFF.");
-      } 
-    });
-    
-    btnLiberarOferta.addEventListener('click', () => { 
-      if(giroConcluido || jaGirou) {
-        liberarCatalogo();
-      } else { 
-        alert("⚡ Gire a roleta primeiro para liberar as ofertas de 80% OFF!"); 
-      }
-    });
-    
+    renderizarCatalogo();
     updateDebug('Pixel carregado - Pronto para rastrear!', 'info');
   });
 </script>
+
 <footer>
   <p>© 2025 Mega Ofertas - 80% OFF + Frete Grátis Exclusivo</p>
 </footer>
